@@ -2,7 +2,9 @@ import React from "react";
 
 import "../sign-sass/sign-up.sass";
 
-const SignIn = ({ setSign }) => {
+import { Link } from "react-router-dom";
+
+const SignUp = ({ setSign }) => {
     const handleCard = (event) => {
         event.preventDefault();
 
@@ -24,7 +26,7 @@ const SignIn = ({ setSign }) => {
             method: "POST",
             body: JSON.stringify(card),
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/x-www-form-urlencoded",
                 // Accept: "*/*",
             },
         });
@@ -141,25 +143,27 @@ const SignIn = ({ setSign }) => {
                     placeholder="here!"
                 />
 
-                <input
-                    type="submit"
-                    name="Password"
-                    className="sign-in-main__submit"
-                />
+                <Link to="/sign/survey">
+                    <input
+                        type="submit"
+                        name="Password"
+                        className="sign-in-main__submit"
+                    />
+                </Link>
             </form>
 
             <div className="sign-in-no-account">
-                Don't have an account?
+                Have an account?
                 <a
                     href="#"
                     className="sign-in-no-account__link"
-                    onClick={() => setSign(true)}
+                    onClick={() => setSign(false)}
                 >
-                    Register
+                    Go back
                 </a>
             </div>
         </div>
     );
 };
 
-export default SignIn;
+export default SignUp;

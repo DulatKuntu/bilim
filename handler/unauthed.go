@@ -10,6 +10,10 @@ import (
 
 // SingUp used to Sing UP
 func (h *AppHandler) SignUp(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Context-Type", "application/all")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
 	signupData, err := requestHandler.GetSignUp(r)
 	if err != nil {
 		DefaultErrorHandler(err, w)

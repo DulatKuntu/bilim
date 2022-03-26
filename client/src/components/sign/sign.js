@@ -13,7 +13,7 @@ const Sign = () => {
     return (
         <div className="sign">
             <img src={signMain} alt="" className="sign-main__img" />
-            {sign ? <SignUp /> : <SignIn setSign={setSign} />}
+            {sign ? <SignUp setSign={setSign} /> : <SignIn setSign={setSign} />}
         </div>
     );
 };

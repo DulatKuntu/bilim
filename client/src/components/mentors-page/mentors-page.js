@@ -18,8 +18,8 @@ const MentorsPage = () => {
                     doloremque sint. Sapiente, tempore!
                 </div>
             </div>
-
-            <MentorsPageQuest />
+            {/* 
+            <MentorsPageQuest /> */}
         </div>
     );
 };

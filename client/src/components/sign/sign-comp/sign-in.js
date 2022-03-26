@@ -6,6 +6,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 
 const SignIn = ({ setSign }) => {
+    const handleCard = (event) => {
+        event.preventDefault();
+
+        const user = {
+            password: event.target.password.value,
+            email: event.target.email.value,
+        };
+
+        addCardHandler(user);
+    };
+
+    async function addCardHandler(card) {
+        const response = await fetch("http://localhost:4000/unauthed/signin", {
+            method: "POST",
+            body: JSON.stringify(card),
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                // Accept: "*/*",
+            },
+        });
+        const data = await response.json();
+        console.log(data);
+        localStorage.setItem("myCat", "Tom");
+    }
+
     return (
         <div className="sign-in">
             <div className="sign-in-welcome">
@@ -16,7 +41,7 @@ const SignIn = ({ setSign }) => {
 
             <div className="sign-in-text">Sign in!</div>
 
-            <form className="sign-in-main">
+            <form className="sign-in-main" onSubmit={handleCard}>
                 <FontAwesomeIcon
                     icon={faEnvelope}
                     className="sign-in-main__emoji"
@@ -25,7 +50,7 @@ const SignIn = ({ setSign }) => {
 
                 <input
                     type="text"
-                    name="Email"
+                    name="email"
                     className="sign-in-main__input"
                     placeholder="example@gmail.com"
                 />
@@ -38,27 +63,10 @@ const SignIn = ({ setSign }) => {
 
                 <input
                     type="text"
-                    name="Password"
+                    name="password"
                     className="sign-in-main__input"
                     placeholder="Enter your password"
                 />
-
-                <div className="sign-in-main__bottom">
-                    <div className="sign-in-main__bottom_remember">
-                        <input
-                            type="checkbox"
-                            name="remember"
-                            className="sign-in-main__bottom_remember_input"
-                        />
-                        <div className="sign-in-main__bottom_remember_text">
-                            Remember me
-                        </div>
-                    </div>
-
-                    <a href="#" className="sign-in-main__bottom_forgot">
-                        Forgot password
-                    </a>
-                </div>
 
                 <input
                     type="submit"
