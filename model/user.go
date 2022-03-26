@@ -23,25 +23,31 @@ type RequestUser struct {
 }
 
 type Mentor struct {
-	ID        int      `json:"id" bson:"id"`
-	Email     string   `json:"email" bson:"email"`
-	Username  string   `json:"username" bson:"username"`
-	Name      string   `json:"name" bson:"name"`
-	Surname   string   `json:"surname" bson:"surname"`
-	Bio       string   `json:"bio" bson:"bio"`
-	Interests []string `json:"interests" bson:"interests"`
-	Students  []int    `json:"students" bson:"students"`
+	ID       int    `json:"id" bson:"id"`
+	Email    string `json:"email" bson:"email"`
+	Token    string `json:"token" bson:"token"`
+	Username string `json:"username" bson:"username"`
+	Password string `json:"password" bson:"password"`
+	Name     string `json:"name" bson:"name"`
+	Surname  string `json:"surname" bson:"surname"`
+	Bio      string `json:"bio" bson:"bio"`
 }
 
 type RequestMentor struct {
 	Email    string `json:"email" bson:"email"`
 	Username string `json:"username" bson:"username"`
+	Password string `json:"password" bson:"password"`
 	Name     string `json:"name" bson:"name"`
 	Surname  string `json:"surname" bson:"surname"`
 	Bio      string `json:"bio" bson:"bio"`
 }
 
 type LoginInfo struct {
+	Username string `json:"username" bson:"username"`
+	Password string `json:"password" bson:"password"`
+}
+
+type LoginMentor struct {
 	Username string `json:"username" bson:"username"`
 	Password string `json:"password" bson:"password"`
 }

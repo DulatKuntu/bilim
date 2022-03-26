@@ -13,7 +13,7 @@ func (h *AppHandler) PostBuddy(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	post, err := h.Repo.CreatePost(PostData)
+	post := h.Repo.CreatePost(PostData)
 
 	SendGeneral(post, w)
 
