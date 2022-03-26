@@ -1,0 +1,10 @@
+[
+    {
+            "insert":"users",
+            "documents":[
+                {
+                "id":1
+                }
+            ]
+    }
+]
