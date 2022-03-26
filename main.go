@@ -76,6 +76,7 @@ func InitRoutes(r *mux.Router, handler *handler.AppHandler) {
 	//authed := r.PathPrefix("/authed").Subrouter()
 
 	unauthed.HandleFunc("/signup", handler.SignUp).Methods("POST")
+	unauthed.HandleFunc("/signupMentor", handler.SignUpMentor).Methods("POST")
 }
 
 func TestRoutes(r *mux.Router, handler *handler.AppHandler) {
