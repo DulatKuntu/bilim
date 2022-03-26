@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"log"
 
 	"github.com/DulatKuntu/bilim/model"
 	"github.com/DulatKuntu/bilim/utils"
@@ -36,7 +37,8 @@ func (r *DatabaseRepository) GetUserByEmail(Email string) (*model.User, error) {
 
 func (r *DatabaseRepository) CreateUser(signData *model.User) (*model.User, error) {
 	usersCollection := r.db.Collection(utils.CollectionUser)
-
+	log.Print(usersCollection)
+	log.Println(1)
 	id, err := GetMaxID([]bson.M{{"$group": bson.M{"_id": nil, "id": bson.M{"$max": "$id"}}}}, true, 1, usersCollection)
 
 	if err != nil {
@@ -48,10 +50,20 @@ func (r *DatabaseRepository) CreateUser(signData *model.User) (*model.User, erro
 	newUser.Email = signData.Email
 	newUser.Username = signData.Username
 
-	usersCollection.InsertOne(
+	_, err = usersCollection.InsertOne(
 		context.TODO(),
 		newUser,
 	)
+	log.Print(err)
 
 	return r.GetUserByEmail(signData.Email)
+}
+
+func (r *DatabaseRepository) Sign() {
+	usersCollection := r.db.Collection(utils.CollectionUser)
+
+	usersCollection.InsertOne(
+		context.TODO(),
+		bson.M{"userId": 2},
+	)
 }
