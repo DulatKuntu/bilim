@@ -4,7 +4,7 @@ import "../header-sass/header-nav.sass";
 
 import { Link } from "react-router-dom";
 
-const HeaderNav = () => {
+const HeaderNav = ({ userRegistered }) => {
     return (
         <div className="header-nav">
             <div className="header-nav-logo__container">
@@ -34,9 +34,15 @@ const HeaderNav = () => {
                 </li>
             </ul>
 
-            <Link to="/sign" className="header-nav-sign">
-                Login/Sign up
-            </Link>
+            {userRegistered ? (
+                <Link to="/mentors/1" className="header-nav-sign">
+                    User Page
+                </Link>
+            ) : (
+                <Link to="/sign" className="header-nav-sign">
+                    Login/Sign up
+                </Link>
+            )}
         </div>
     );
 };

@@ -4,21 +4,6 @@ import MentorsPageQuest from "./mentors-comp/mentors-page-quest";
 import "./mentors-sass/mentors-page.sass";
 
 const MentorsPage = () => {
-    useEffect(() => {
-        const allCardsHandler = async () => {
-            const response = await fetch("http://localhost:8080/api/task/all", {
-                headers: {
-                    Authorization: `${sessionStorage.getItem("token")}`,
-                    "Content-Type": "application/card",
-                },
-            });
-            const data = await response.json();
-            console.log(data);
-        };
-
-        allCardsHandler();
-    }, []);
-
     return (
         <div className="mentors-page">
             <MentorsPageTop />

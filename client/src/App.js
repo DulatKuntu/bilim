@@ -8,16 +8,22 @@ import SurveyResults from "./components/survey-results/survey-results";
 
 import "./app.sass";
 
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
+    const [userRegistered, setUserRegistered] = useState(false);
+
     return (
         <div className="App">
-            <HeaderNav />
+            <HeaderNav userRegistered={userRegistered} />
 
             <Routes>
                 <Route path="/" element={<Header />} />
-                <Route path="/sign" element={<Sign />} />
+                <Route
+                    path="/sign"
+                    element={<Sign setUserRegistered={setUserRegistered} />}
+                />
                 <Route path="/sign/survey" element={<Survey />} />
                 <Route
                     path="/sign/survey/results"

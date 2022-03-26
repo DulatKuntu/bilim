@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../sign-sass/sign-in.sass";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 
-const SignIn = ({ setSign }) => {
+import UserProfilePopUp from "./user-profile-pop-up";
+
+const SignIn = ({ setUserRegistered, setSign }) => {
+    const [submited, setSubmited] = useState(false);
+    const [popUp, setPopUp] = useState(false);
+
     const handleCard = (event) => {
         event.preventDefault();
+        setSubmited(true);
 
         const user = {
             password: event.target.password.value,
@@ -27,15 +33,13 @@ const SignIn = ({ setSign }) => {
             },
         });
         const data = await response.json();
-        sessionStorage.setItem("token", JSON.stringify(data));
-
-        getToken();
+        sessionStorage.setItem("token", data.data.token);
+        setUserRegistered(true);
     }
 
     function getToken() {
         const tokenString = sessionStorage.getItem("token");
-        const userToken = JSON.parse(tokenString);
-        return userToken?.token;
+        console.log(tokenString);
     }
 
     return (
@@ -79,6 +83,9 @@ const SignIn = ({ setSign }) => {
                     type="submit"
                     name="Password"
                     className="sign-in-main__submit"
+                    onClick={() => {
+                        setUserRegistered(true);
+                    }}
                 />
             </form>
 
@@ -92,6 +99,8 @@ const SignIn = ({ setSign }) => {
                     Register
                 </a>
             </div>
+
+            {submited && <UserProfilePopUp />}
         </div>
     );
 };
