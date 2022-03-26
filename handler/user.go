@@ -65,3 +65,20 @@ func (h *AppHandler) AddInterests(w http.ResponseWriter, r *http.Request) {
 
 	SendGeneral(interests, w)
 }
+
+func (h *AppHandler) GetPosts(w http.ResponseWriter, r *http.Request) {
+	userToken := requestHandler.GetToken(r)
+	userID, err := h.Repo.GetIDByToken(userToken)
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+	mentors, err := h.Repo.GetPosts(userID)
+
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+
+	SendGeneral(mentors, w)
+}

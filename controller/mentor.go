@@ -94,19 +94,38 @@ func (r *DatabaseRepository) GetMentorByID(mentorID int) (*model.Mentor, error) 
 	return &Mentor, nil
 }
 
-func (r *DatabaseRepository) GetMentors(userID int) (*model.Mentor, error) {
-	mentorsCollection := r.db.Collection(utils.CollectionMentor)
+func (r *DatabaseRepository) GetMentors(userID int) ([]*model.Mentor, error) {
+	usersCollection := r.db.Collection(utils.CollectionUser)
 
-	var mentorData model.Mentor
+	pipeline := []bson.M{
+		bson.M{"$match": bson.M{"id": userID}},
+		bson.M{"$lookup": bson.M{"from": "mentors", "localField": "interests", "foreignField": "interests", "as": "result"}},
+		bson.M{"$project": bson.M{"result": 1, "_id": 0}},
+	}
 
-	err := mentorsCollection.FindOne(
+	cursor, err := usersCollection.Aggregate(
 		context.TODO(),
-		bson.M{"username": Username, "password": Password},
-	).Decode(&mentorData)
-	log.Println(err)
+		pipeline,
+	)
+
+	type resultParse struct {
+		Result []*model.Mentor `json:"result" bson:"result"`
+	}
+	var mentors []*model.Mentor
+
+	for cursor.Next(context.TODO()) {
+		var result resultParse
+		err = cursor.Decode(&result)
+		if err != nil {
+			return nil, errors.New("no comment exists")
+		}
+		for _, item := range result.Result {
+			mentors = append(mentors, item)
+		}
+	}
 	if err != nil {
 		return nil, errors.New("username or password are not correct")
 	}
 
-	return &mentorData, err
+	return mentors, err
 }

@@ -11,8 +11,14 @@ import (
 
 // GetSignUp used to get signup struct from request, also for validation
 func GetToken(r *http.Request) string {
-	reqToken := r.Header.Get("Authorization")
-	return reqToken
+	type tok struct {
+		Token string `json:"token" bson:"token"`
+	}
+	var s tok
+	body, _ := ioutil.ReadAll(r.Body)
+	_ = json.Unmarshal(body, &s)
+
+	return s.Token
 }
 
 func GetUser(r *http.Request) (*model.User, error) {
