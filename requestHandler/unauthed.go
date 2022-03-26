@@ -43,3 +43,16 @@ func GetSignUpMentor(r *http.Request) (*model.RequestMentor, error) {
 
 	return &s, nil
 }
+
+func GetLogin(r *http.Request) (*model.LoginInfo, error) {
+
+	var s model.LoginInfo
+	body, _ := ioutil.ReadAll(r.Body)
+	err := json.Unmarshal(body, &s)
+
+	if err != nil {
+		return nil, errors.New("bad request")
+	}
+
+	return &s, nil
+}

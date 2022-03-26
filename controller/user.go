@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"errors"
 	"log"
 
 	"github.com/DulatKuntu/bilim/model"
@@ -60,6 +61,22 @@ func (r *DatabaseRepository) GetMentorByEmail(Email string) (*model.User, error)
 
 	return &mentorData, err
 }
+func (r *DatabaseRepository) CheckPassword(Username, Password string) (*model.User, error) {
+	usersCollection := r.db.Collection(utils.CollectionUser)
+
+	var userData model.User
+
+	err := usersCollection.FindOne(
+		context.TODO(),
+		bson.M{"username": Username, "password": Password},
+	).Decode(&userData)
+	log.Println(err)
+	if err != nil {
+		return nil, errors.New("Username of password are not correct")
+	}
+
+	return &userData, err
+}
 
 func (r *DatabaseRepository) CreateUser(signData *model.RequestUser) (*model.User, error) {
 	usersCollection := r.db.Collection(utils.CollectionUser)
@@ -69,15 +86,6 @@ func (r *DatabaseRepository) CreateUser(signData *model.RequestUser) (*model.Use
 	if err != nil {
 		return nil, err
 	}
-
-	//var newUser model.User
-	// newUser.Email = signData.Email
-	// newUser.Username = signData.Username
-	// newUser.Password = signData.Password
-	// newUser.Name = signData.Name
-	// newUser.Surname = signData.Surname
-	// newUser.Bio = signData.Bio
-	// newUser.Interests = signData.Interests
 	var newUser model.User
 	newUser.ID = id
 	newUser.Email = signData.Email
@@ -85,7 +93,7 @@ func (r *DatabaseRepository) CreateUser(signData *model.RequestUser) (*model.Use
 	newUser.Name = signData.Name
 	newUser.Surname = signData.Surname
 	newUser.Bio = signData.Bio
-
+	newUser.Password = signData.Password
 	_, err = usersCollection.InsertOne(
 		context.TODO(),
 		newUser,
@@ -93,6 +101,21 @@ func (r *DatabaseRepository) CreateUser(signData *model.RequestUser) (*model.Use
 	log.Print(err)
 
 	return r.GetUserByEmail(signData.Email)
+}
+func (r *DatabaseRepository) InsertToken(UserID int, token string) error {
+	usersCollection := r.db.Collection(utils.CollectionUser)
+
+	_, err := usersCollection.UpdateOne(
+		context.TODO(),
+		bson.M{"id": UserID},
+		bson.M{
+			"$set": bson.M{
+				"token": token,
+			},
+		},
+	)
+
+	return err
 }
 
 func (r *DatabaseRepository) CreateMentor(signData *model.RequestMentor) (*model.User, error) {
