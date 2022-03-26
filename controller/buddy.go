@@ -8,13 +8,13 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-func (r *DatabaseRepository) CreatePost(PostData *model.RequestBuddyPost) (*model.BuddyPost, error) {
+func (r *DatabaseRepository) CreatePost(PostData *model.RequestBuddyPost) *model.BuddyPost {
 	postsCollection := r.db.Collection(utils.CollectionPosts)
 
 	id, err := GetMaxID([]bson.M{{"$group": bson.M{"_id": nil, "id": bson.M{"$max": "$id"}}}}, true, 1, postsCollection)
 
 	if err != nil {
-		return nil, err
+		return nil
 	}
 	var newPost *model.BuddyPost
 	newPost.UserID = PostData.UserID
@@ -27,5 +27,5 @@ func (r *DatabaseRepository) CreatePost(PostData *model.RequestBuddyPost) (*mode
 		newPost,
 	)
 
-	return newPost, err
+	return newPost
 }

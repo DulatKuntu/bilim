@@ -49,10 +49,10 @@ func (r *DatabaseRepository) GetUserByEmail(Email string) (*model.User, error) {
 	return &userData, err
 }
 
-func (r *DatabaseRepository) GetMentorByEmail(Email string) (*model.User, error) {
+func (r *DatabaseRepository) GetMentorByEmail(Email string) (*model.Mentor, error) {
 	mentorsCollection := r.db.Collection(utils.CollectionMentor)
 
-	var mentorData model.User
+	var mentorData model.Mentor
 
 	err := mentorsCollection.FindOne(
 		context.TODO(),
@@ -72,10 +72,27 @@ func (r *DatabaseRepository) CheckPassword(Username, Password string) (*model.Us
 	).Decode(&userData)
 	log.Println(err)
 	if err != nil {
-		return nil, errors.New("Username of password are not correct")
+		return nil, errors.New("username of password are not correct")
 	}
 
 	return &userData, err
+}
+
+func (r *DatabaseRepository) CheckPasswordMentor(Username, Password string) (*model.Mentor, error) {
+	mentorsCollection := r.db.Collection(utils.CollectionMentor)
+
+	var mentorData model.Mentor
+
+	err := mentorsCollection.FindOne(
+		context.TODO(),
+		bson.M{"username": Username, "password": Password},
+	).Decode(&mentorData)
+	log.Println(err)
+	if err != nil {
+		return nil, errors.New("username or password are not correct")
+	}
+
+	return &mentorData, err
 }
 
 func (r *DatabaseRepository) CreateUser(signData *model.RequestUser) (*model.User, error) {
@@ -118,7 +135,7 @@ func (r *DatabaseRepository) InsertToken(UserID int, token string) error {
 	return err
 }
 
-func (r *DatabaseRepository) CreateMentor(signData *model.RequestMentor) (*model.User, error) {
+func (r *DatabaseRepository) CreateMentor(signData *model.RequestMentor) (*model.Mentor, error) {
 	mentorsCollection := r.db.Collection(utils.CollectionMentor)
 
 	id, err := GetMaxID([]bson.M{{"$group": bson.M{"_id": nil, "id": bson.M{"$max": "$id"}}}}, true, 1, mentorsCollection)
@@ -127,10 +144,11 @@ func (r *DatabaseRepository) CreateMentor(signData *model.RequestMentor) (*model
 		return nil, err
 	}
 
-	var newMentor model.User
+	var newMentor model.Mentor
 	newMentor.ID = id
 	newMentor.Email = signData.Email
 	newMentor.Username = signData.Username
+	newMentor.Password = signData.Password
 	newMentor.Name = signData.Name
 	newMentor.Surname = signData.Surname
 	newMentor.Bio = signData.Bio
