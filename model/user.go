@@ -7,10 +7,11 @@ type User struct {
 	Username  string   `json:"username" bson:"username"`
 	Name      string   `json:"name" bson:"name"`
 	Surname   string   `json:"surname" bson:"surname"`
-	Image     string   `json:"image" bson:"image"`
 	Password  string   `json:"password" bson:"password"`
+	Image     string   `json:"image" bson:"image"`
 	Bio       string   `json:"bio" bson:"bio"`             //mentor or student
-	Interests []string `json;"interests" bson:"interests"` //for example, Biology, CS, Engineering
+	Interests []string `json:"interests" bson:"interests"` //for example, Biology, CS, Engineering
+	Groups    []string `json:"groups" bson:"groups"`
 }
 
 type RequestUser struct {
