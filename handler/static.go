@@ -25,7 +25,7 @@ func (h *AppHandler) RouterImageHandler(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 
-	if locationType != "profile" {
+	if locationType != "profileImage" {
 		DefaultErrorHandler(errors.New("bad request"), w)
 		return
 	}

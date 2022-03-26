@@ -7,6 +7,8 @@ services:
   bilim:
     build: ./
     restart: always
+    volumes:
+      - ${LocationProfileImage}:${LocationProfileImage}
     ports:
       - 4000:${APIPortHTTP}
       - 8080:${StaticPortHTTP}

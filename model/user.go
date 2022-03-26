@@ -7,6 +7,7 @@ type User struct {
 	Username  string `json:"username" bson:"username"`
 	Name      string `json:"name" bson:"name"`
 	Surname   string `json:"surname" bson:"surname"`
+	Image     string `json:"image" bson:"image"`
 	Password  string `json:"password" bson:"password"`
 	Bio       string `json:"bio" bson:"bio"`             //mentor or student
 	Interests string `json;"interests" bson:"interests"` //for example, Biology, CS, Engineering
