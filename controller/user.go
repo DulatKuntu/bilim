@@ -244,3 +244,19 @@ func (r *DatabaseRepository) UpdateProfile(userID int, user *model.User) error {
 
 	return nil
 }
+
+func (r *DatabaseRepository) AddInterest(interestID, userID int) error {
+	usersCollection := r.db.Collection(utils.CollectionUser)
+
+	_, err := usersCollection.UpdateOne(
+		context.TODO(),
+		bson.M{
+			"id": userID,
+		},
+		bson.M{
+			"$addToSet": bson.M{"interests": interestID},
+		},
+	)
+
+	return err
+}

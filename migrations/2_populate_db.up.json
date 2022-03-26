@@ -24,5 +24,26 @@
                 "bio":"bioMentor"
             }
         ]
-}
+    },
+    {
+        "insert":"interests",
+        "documents":[
+            {
+                "id":1,
+                "name":"Programming"
+            },
+            {
+                "id":2,
+                "name":"Math"
+            },
+            {
+                "id":3,
+                "name":"Biology"
+            },
+            {
+                "id":4,
+                "name":"Physics"
+            }
+        ]
+    }
 ]

@@ -1,16 +1,16 @@
 package model
 
 type User struct {
-	ID        int    `json:"id" bson:"id"`
-	Email     string `json:"email" bson:"email"`
-	Token     string `json:"token" bson:"token"`
-	Username  string `json:"username" bson:"username"`
-	Name      string `json:"name" bson:"name"`
-	Surname   string `json:"surname" bson:"surname"`
-	Image     string `json:"image" bson:"image"`
-	Password  string `json:"password" bson:"password"`
-	Bio       string `json:"bio" bson:"bio"`             //mentor or student
-	Interests string `json;"interests" bson:"interests"` //for example, Biology, CS, Engineering
+	ID        int      `json:"id" bson:"id"`
+	Email     string   `json:"email" bson:"email"`
+	Token     string   `json:"token" bson:"token"`
+	Username  string   `json:"username" bson:"username"`
+	Name      string   `json:"name" bson:"name"`
+	Surname   string   `json:"surname" bson:"surname"`
+	Image     string   `json:"image" bson:"image"`
+	Password  string   `json:"password" bson:"password"`
+	Bio       string   `json:"bio" bson:"bio"`             //mentor or student
+	Interests []string `json;"interests" bson:"interests"` //for example, Biology, CS, Engineering
 }
 
 type RequestUser struct {
@@ -50,4 +50,9 @@ type LoginInfo struct {
 type LoginMentor struct {
 	Username string `json:"username" bson:"username"`
 	Password string `json:"password" bson:"password"`
+}
+
+type Interests struct {
+	InterestID int    `json:"id" bson:"id"`
+	Name       string `json:"name" bson:"name"`
 }
