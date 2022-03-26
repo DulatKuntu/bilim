@@ -1,0 +1,113 @@
+.sign-in
+    height: 85vh
+    position: absolute
+    left: 50%
+    right: 10%
+    top: 12%
+
+    background: #FFFFFF
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08)
+    border-radius: 8px
+
+    padding: 44px 40px
+
+    &-welcome
+        font-weight: 500
+        font-size: 30px
+        line-height: 135.5%
+        color: #2F2F2F
+        margin-bottom: 30px
+
+        &__company
+            font-weight: 900
+            font-size: 40px
+            line-height: 135.5%
+
+            color: #6358DC
+
+    &-text
+        text-align: center
+        font-weight: 900
+        font-size: 40px
+        margin-bottom: 20px
+
+    &-main
+        width: 100%
+        position: relative
+
+        &__emoji
+            position: absolute
+            top: 0
+            left: 10px
+
+        #sign-in-first__emoji
+            top: 35px
+
+        #sign-in-second__emoji
+            top: 105px
+
+        &__input
+            width: 100%
+            background: #ECECEC
+            border-radius: 8px
+            height: 50px
+            border: none
+            margin-top: 20px
+
+            padding-left: 40px
+
+            &::placeholder
+                font-weight: 700
+                font-size: 16px
+
+                color: #2F2F2F
+
+            &:nth-child(1)
+                margin-top: 20px
+
+        &__bottom
+            margin-top: 20px
+            display: flex
+            justify-content: space-between
+            align-items: center
+
+            &_remember
+                display: flex
+                align-items: center
+
+                &_text
+                    margin-left: 5px
+
+                    font-weight: 400
+                    font-size: 16px
+
+                    color: #2F2F2F
+            &_forgot
+                font-weight: 400
+                font-size: 16px
+                line-height: 135.5%
+
+                color: #6358DC
+
+                text-decoration: none
+
+        &__submit
+            width: 100%
+            height: 50px
+            border: none
+            margin-top: 20px
+
+            background: #6358DC
+            border-radius: 8px
+
+            font-weight: 600
+            font-size: 16px
+
+            color: #FFFFFF
+
+    &-no-account
+        margin-top: 40px
+        text-align: center
+
+        &__link
+            text-decoration: none

@@ -1,0 +1,41 @@
+import React from "react";
+
+import "../header-sass/header-nav.sass";
+
+import { Link } from "react-router-dom";
+
+const HeaderNav = () => {
+    return (
+        <div className="header-nav">
+            <div className="header-nav-logo__container">
+                <img src="" alt="" className="header-nav-logo" />
+            </div>
+
+            <div className="header-nav-company">Company name</div>
+
+            <ul className="header-nav-main">
+                <li className="header-nav-main__elements">
+                    <a href="#" className="header-nav-main__elements_link">
+                        Mentors
+                    </a>
+                </li>
+                <li className="header-nav-main__elements">
+                    <a href="#" className="header-nav-main__elements_link">
+                        Study buddy
+                    </a>
+                </li>
+                <li className="header-nav-main__elements">
+                    <a href="#" className="header-nav-main__elements_link">
+                        Groups
+                    </a>
+                </li>
+            </ul>
+
+            <Link to="/sign" className="header-nav-sign">
+                Login/Sign up
+            </Link>
+        </div>
+    );
+};
+
+export default HeaderNav;
