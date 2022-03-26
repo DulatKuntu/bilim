@@ -160,11 +160,36 @@ func (r *DatabaseRepository) CreateMentor(signData *model.RequestMentor) (*model
 	return r.GetMentorByEmail(signData.Email)
 }
 
-func (r *DatabaseRepository) Sign() {
+func (r *DatabaseRepository) GetIDByToken(token string) (int, error) {
 	usersCollection := r.db.Collection(utils.CollectionUser)
 
-	usersCollection.InsertOne(
+	var User model.User
+
+	err := usersCollection.FindOne(
 		context.TODO(),
-		bson.M{"userId": 2},
-	)
+		bson.M{"token": token},
+	).Decode(&User)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return User.ID, nil
+
+}
+func (r *DatabaseRepository) GetUserByID(userID int) (*model.User, error) {
+	usersCollection := r.db.Collection(utils.CollectionUser)
+
+	var User model.User
+
+	err := usersCollection.FindOne(
+		context.TODO(),
+		bson.M{"id": userID},
+	).Decode(&User)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &User, nil
 }
