@@ -1,0 +1,4 @@
+port: "4000"
+static_port: "8080"
+dburi: "mongodb://localhost:27017"
+dbname: "bilim"
