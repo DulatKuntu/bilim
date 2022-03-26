@@ -11,7 +11,7 @@ const SignIn = ({ setSign }) => {
 
         const user = {
             password: event.target.password.value,
-            email: event.target.email.value,
+            username: event.target.username.value,
         };
 
         addCardHandler(user);
@@ -27,8 +27,15 @@ const SignIn = ({ setSign }) => {
             },
         });
         const data = await response.json();
-        console.log(data);
-        localStorage.setItem("myCat", "Tom");
+        sessionStorage.setItem("token", JSON.stringify(data));
+
+        getToken();
+    }
+
+    function getToken() {
+        const tokenString = sessionStorage.getItem("token");
+        const userToken = JSON.parse(tokenString);
+        return userToken?.token;
     }
 
     return (
@@ -50,7 +57,7 @@ const SignIn = ({ setSign }) => {
 
                 <input
                     type="text"
-                    name="email"
+                    name="username"
                     className="sign-in-main__input"
                     placeholder="example@gmail.com"
                 />

@@ -143,13 +143,13 @@ const SignUp = ({ setSign }) => {
                     placeholder="here!"
                 />
 
-                <Link to="/sign/survey">
-                    <input
-                        type="submit"
-                        name="Password"
-                        className="sign-in-main__submit"
-                    />
-                </Link>
+                {/* <Link to="/sign/survey"> */}
+                <input
+                    type="submit"
+                    name="Password"
+                    className="sign-in-main__submit"
+                />
+                {/* </Link> */}
             </form>
 
             <div className="sign-in-no-account">

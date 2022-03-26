@@ -1,3 +1,5 @@
+import "../survey-results-sass/survey-results-card.sass";
+
 const SurveyResultsCard = () => {
     return (
         <div className="survey-results-card">

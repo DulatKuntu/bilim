@@ -7,9 +7,19 @@ const SurveyResults = () => {
         <div className="survey-results">
             <h2 className="survey-results-main">Твои результаты:</h2>
 
-            <SurveyResultsCard></SurveyResultsCard>
-            <SurveyResultsCard></SurveyResultsCard>
-            <SurveyResultsCard></SurveyResultsCard>
+            <div className="survey-results-card__container">
+                <div className="survey-results-number">1</div>
+                <SurveyResultsCard></SurveyResultsCard>
+            </div>
+
+            <div className="survey-results-card__container">
+                <div className="survey-results-number">2</div>
+                <SurveyResultsCard></SurveyResultsCard>
+            </div>
+            <div className="survey-results-card__container">
+                <div className="survey-results-number">3</div>
+                <SurveyResultsCard></SurveyResultsCard>
+            </div>
         </div>
     );
 };

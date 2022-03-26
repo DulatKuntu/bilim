@@ -73,6 +73,9 @@ func (h *AppHandler) SignUpMentor(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AppHandler) SignIn(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Context-Type", "application/all")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	loginData, err := requestHandler.GetLogin(r)
 	if err != nil {
 		DefaultErrorHandler(err, w)
