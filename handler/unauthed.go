@@ -2,9 +2,11 @@ package handler
 
 import (
 	"errors"
+	"log"
 	"net/http"
 
 	"github.com/DulatKuntu/bilim/requestHandler"
+	"github.com/DulatKuntu/bilim/utils"
 	//"github.com/DulatKuntu/bilim/utils"
 )
 
@@ -26,6 +28,7 @@ func (h *AppHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	user, err := h.Repo.GetUserByEmail(signupData.Email)
+
 	if err == nil { //case user already signedIn with this email before
 		SendGeneral(user, w)
 		return
@@ -39,6 +42,57 @@ func (h *AppHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AppHandler) SignUpMentor(w http.ResponseWriter, r *http.Request) {
+	signupData, err := requestHandler.GetSignUpMentor(r)
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
 
-	h.Repo.Sign()
+	_, err = h.Repo.GetUserByUsername(signupData.Username)
+	if err == nil {
+		DefaultErrorHandler(errors.New("username is already taken"), w)
+		return
+	}
+	_, err = h.Repo.GetMentorByUsername(signupData.Username)
+	if err == nil {
+		DefaultErrorHandler(errors.New("username is already taken"), w)
+		return
+	}
+	user, err := h.Repo.GetMentorByEmail(signupData.Email)
+
+	if err == nil { //case user already signedIn with this email before
+		SendGeneral(user, w)
+		return
+	}
+	user, err = h.Repo.CreateMentor(signupData)
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+	SendGeneral(user, w)
+}
+
+func (h *AppHandler) SignIn(w http.ResponseWriter, r *http.Request) {
+	loginData, err := requestHandler.GetLogin(r)
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+
+	token := utils.GenerateToken(loginData.Username)
+	log.Println(loginData.Username, loginData.Password)
+	user, err := h.Repo.CheckPassword(loginData.Username, loginData.Password)
+
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+
+	err = h.Repo.InsertToken(user.ID, token)
+
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+	SendGeneral(user, w)
 }
