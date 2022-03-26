@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"log"
+	"os"
 
 	"github.com/DulatKuntu/bilim/model"
 	"github.com/DulatKuntu/bilim/utils"
@@ -174,6 +175,9 @@ func (r *DatabaseRepository) GetIDByToken(token string) (int, error) {
 		return 0, err
 	}
 
+	if token == "" {
+		return 0, errors.New("Token not set")
+	}
 	return User.ID, nil
 
 }
@@ -209,4 +213,51 @@ func (r *DatabaseRepository) GetMentorByID(mentorID int) (*model.Mentor, error) 
 	}
 
 	return &Mentor, nil
+}
+
+func (r *DatabaseRepository) UpdateProfile(userID int, user *model.User) error {
+
+	usersCollection := r.db.Collection(utils.CollectionUser)
+
+	var toChange model.User
+	err := usersCollection.FindOne(
+		context.TODO(),
+		bson.M{
+			"id": userID,
+		},
+	).Decode(&toChange)
+
+	if err != nil {
+		return err
+	}
+	if user.Bio != "" {
+		toChange.Bio = user.Bio
+	}
+	if user.Name != "" {
+		toChange.Name = user.Name
+	}
+	if user.Surname != "" {
+		toChange.Surname = user.Surname
+	}
+	if user.Image != "" {
+		toChange.Image = user.Image
+	}
+
+	usersCollection.UpdateOne(
+		context.TODO(),
+		bson.M{"userID": userID},
+		bson.M{"bio": toChange.Bio, "name": toChange.Name, "surname": toChange.Surname, "image": toChange.Image},
+	)
+	locationImage, exists := os.LookupEnv("LocationProfileImage")
+
+	if !exists {
+		return errors.New("enviroment variable is not set")
+	}
+
+	err = os.Remove(locationImage + toChange.Image)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
