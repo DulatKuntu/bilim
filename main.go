@@ -79,11 +79,8 @@ func InitRoutes(r *mux.Router, handler *handler.AppHandler) {
 	unauthed.HandleFunc("/signup", handler.SignUp).Methods("POST")
 	unauthed.HandleFunc("/signupMentor", handler.SignUpMentor).Methods("POST")
 	unauthed.HandleFunc("/signin", handler.SignIn).Methods("POST")
-<<<<<<< HEAD
 	unauthed.HandleFunc("/signinMentor", handler.SignInMentor).Methods("POST")
-=======
 	authed.HandleFunc("/getProfile", handler.GetProfile).Methods("GET")
->>>>>>> 0aeec91d5ca68dd895566d31b2bd692d62ad18cf
 	buddy.HandleFunc("/postBuddy", handler.PostBuddy).Methods("POST")
 
 }
