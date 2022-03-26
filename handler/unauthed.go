@@ -78,7 +78,7 @@ func (h *AppHandler) SignIn(w http.ResponseWriter, r *http.Request) {
 	token := utils.GenerateToken(loginData.Username)
 	log.Println(loginData.Username, loginData.Password)
 	user, err := h.Repo.CheckPassword(loginData.Username, loginData.Password)
-
+	user.Token = token
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
