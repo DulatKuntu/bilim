@@ -10,4 +10,5 @@ const (
 	// CollectionUsers collection
 	CollectionUser   = "users"
 	CollectionMentor = "mentors"
+	CollectionPosts  = "posts"
 )
