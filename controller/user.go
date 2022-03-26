@@ -193,3 +193,20 @@ func (r *DatabaseRepository) GetUserByID(userID int) (*model.User, error) {
 
 	return &User, nil
 }
+
+func (r *DatabaseRepository) GetMentorByID(mentorID int) (*model.Mentor, error) {
+	mentorsCollection := r.db.Collection(utils.CollectionMentor)
+
+	var Mentor model.Mentor
+
+	err := mentorsCollection.FindOne(
+		context.TODO(),
+		bson.M{"id": mentorID},
+	).Decode(&Mentor)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &Mentor, nil
+}
