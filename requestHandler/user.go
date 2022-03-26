@@ -4,21 +4,18 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	"github.com/DulatKuntu/bilim/model"
 )
 
 // GetSignUp used to get signup struct from request, also for validation
-func GetToken(r *http.Request) string {
-	type tok struct {
-		Token string `json:"token" bson:"token"`
-	}
-	var s tok
+func GetToken(r *http.Request, tok interface{}) interface{} {
 	body, _ := ioutil.ReadAll(r.Body)
-	_ = json.Unmarshal(body, &s)
-
-	return s.Token
+	err := json.Unmarshal(body, tok)
+	log.Print(tok, err)
+	return tok
 }
 
 func GetUser(r *http.Request) (*model.User, error) {

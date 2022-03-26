@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/DulatKuntu/bilim/requestHandler"
@@ -9,7 +10,8 @@ import (
 //"github.com/DulatKuntu/bilim/utils"
 
 func (h *AppHandler) GetProfile(w http.ResponseWriter, r *http.Request) {
-	userToken := requestHandler.GetToken(r)
+	var a interface{}
+	userToken := requestHandler.GetToken(r, a)
 	userID, err := h.Repo.GetIDByToken(userToken)
 	if err != nil {
 		DefaultErrorHandler(err, w)
@@ -27,7 +29,8 @@ func (h *AppHandler) GetProfile(w http.ResponseWriter, r *http.Request) {
 
 func (h *AppHandler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
 	user, err := requestHandler.GetUser(r)
-	userToken := requestHandler.GetToken(r)
+	var a interface{}
+	userToken := requestHandler.GetToken(r, a)
 	userID, err := h.Repo.GetIDByToken(userToken)
 
 	if err != nil {
@@ -45,8 +48,15 @@ func (h *AppHandler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AppHandler) AddInterests(w http.ResponseWriter, r *http.Request) {
-	userToken := requestHandler.GetToken(r)
-	userID, err := h.Repo.GetIDByToken(userToken)
+	type str struct {
+		Token      string `json:"token" bson:"token"`
+		InterestID int    `json:"id" bson:"id"`
+		Name       string `json:"name" bson:"name"`
+	}
+	var s str
+	userToken := requestHandler.GetToken(r, s).(str)
+	userID, err := h.Repo.GetIDByToken(userToken.Token)
+	log.Print(err, userToken.Token)
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
@@ -67,7 +77,8 @@ func (h *AppHandler) AddInterests(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AppHandler) GetPosts(w http.ResponseWriter, r *http.Request) {
-	userToken := requestHandler.GetToken(r)
+	var a interface{}
+	userToken := requestHandler.GetToken(r, a)
 	userID, err := h.Repo.GetIDByToken(userToken)
 	if err != nil {
 		DefaultErrorHandler(err, w)

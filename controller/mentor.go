@@ -129,3 +129,39 @@ func (r *DatabaseRepository) GetMentors(userID int) ([]*model.Mentor, error) {
 
 	return mentors, err
 }
+
+func (r *DatabaseRepository) GetPosts(userID int) ([]*model.Mentor, error) {
+	usersCollection := r.db.Collection(utils.CollectionUser)
+
+	pipeline := []bson.M{
+		bson.M{"$match": bson.M{"id": userID}},
+		bson.M{"$lookup": bson.M{"from": "mentors", "localField": "interests", "foreignField": "interests", "as": "result"}},
+		bson.M{"$project": bson.M{"result": 1, "_id": 0}},
+	}
+
+	cursor, err := usersCollection.Aggregate(
+		context.TODO(),
+		pipeline,
+	)
+
+	type resultParse struct {
+		Result []*model.Mentor `json:"result" bson:"result"`
+	}
+	var mentors []*model.Mentor
+
+	for cursor.Next(context.TODO()) {
+		var result resultParse
+		err = cursor.Decode(&result)
+		if err != nil {
+			return nil, errors.New("no comment exists")
+		}
+		for _, item := range result.Result {
+			mentors = append(mentors, item)
+		}
+	}
+	if err != nil {
+		return nil, errors.New("username or password are not correct")
+	}
+
+	return mentors, err
+}

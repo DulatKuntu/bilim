@@ -93,7 +93,7 @@ func (r *DatabaseRepository) InsertToken(UserID int, token string) error {
 	return err
 }
 
-func (r *DatabaseRepository) GetIDByToken(token string) (int, error) {
+func (r *DatabaseRepository) GetIDByToken(token interface{}) (int, error) {
 	usersCollection := r.db.Collection(utils.CollectionUser)
 
 	var User model.User
@@ -102,11 +102,11 @@ func (r *DatabaseRepository) GetIDByToken(token string) (int, error) {
 		context.TODO(),
 		bson.M{"token": token},
 	).Decode(&User)
-
+	log.Print(token)
 	if err != nil {
 		return 0, err
 	}
-
+	log.Print(User)
 	if token == "" {
 		return 0, errors.New("Token not set")
 	}
