@@ -22,6 +22,7 @@ func (h *AppHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	user, err := h.Repo.GetUserByEmail(signupData.Email)
+
 	if err == nil { //case user already signedIn with this email before
 		SendGeneral(user, w)
 		return
@@ -35,6 +36,32 @@ func (h *AppHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AppHandler) SignUpMentor(w http.ResponseWriter, r *http.Request) {
+	signupData, err := requestHandler.GetSignUpMentor(r)
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
 
-	h.Repo.Sign()
+	_, err = h.Repo.GetUserByUsername(signupData.Username)
+	if err == nil {
+		DefaultErrorHandler(errors.New("username is already taken"), w)
+		return
+	}
+	_, err = h.Repo.GetMentorByUsername(signupData.Username)
+	if err == nil {
+		DefaultErrorHandler(errors.New("username is already taken"), w)
+		return
+	}
+	user, err := h.Repo.GetUserByEmail(signupData.Email)
+
+	if err == nil { //case user already signedIn with this email before
+		SendGeneral(user, w)
+		return
+	}
+	user, err = h.Repo.CreateMentor(signupData)
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+	SendGeneral(user, w)
 }

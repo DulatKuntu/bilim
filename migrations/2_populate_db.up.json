@@ -3,8 +3,26 @@
             "insert":"users",
             "documents":[
                 {
-                "id":1
+                "id":1,
+                "email":"test@gmail.com",
+                "username":"DulatKuntu",
+                "name":"Dulat",
+                "surname":"Kuntu",
+                "bio":"bio"
                 }
             ]
-    }
+    },
+    {
+        "insert":"mentors",
+        "documents":[
+            {
+                "id":1,
+                "email":"testMentor@gmail.com",
+                "username":"DulatKuntuMentor",
+                "name":"DulatMentor",
+                "surname":"KuntuMentor",
+                "bio":"bioMentor"
+            }
+        ]
+}
 ]
