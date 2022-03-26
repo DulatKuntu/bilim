@@ -40,28 +40,3 @@ func NewConfig() (*Config, error) {
 
 	return config, nil
 }
-
-func NewConfigUnitTest() (*Config, error) {
-	config := &Config{}
-
-	dburi := "mongodb://localhost:27017"
-
-	log.Print(dburi)
-	StaticPortHTTP, exists := os.LookupEnv("StaticPortHTTP")
-
-	if !exists {
-		return nil, errors.New(".env variables not set")
-	}
-	APIPortHTTP, exists := os.LookupEnv("APIPortHTTP")
-
-	if !exists {
-		return nil, errors.New(".env variables not set")
-	}
-
-	config.Dburi = dburi
-	config.StaticPort = StaticPortHTTP
-	config.Port = APIPortHTTP
-	config.Dbname = "fitbase_unittest"
-
-	return config, nil
-}

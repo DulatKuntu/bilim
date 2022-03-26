@@ -2,6 +2,7 @@ package handler
 
 import (
 	"errors"
+	"log"
 	"net/http"
 
 	"github.com/DulatKuntu/bilim/requestHandler"
@@ -9,9 +10,9 @@ import (
 )
 
 // SingUp used to Sing UP
-func (h *AppHandler) SingUp(w http.ResponseWriter, r *http.Request) {
+func (h *AppHandler) SignUp(w http.ResponseWriter, r *http.Request) {
 	signupData, err := requestHandler.GetSignUp(r)
-
+	log.Print(signupData)
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
