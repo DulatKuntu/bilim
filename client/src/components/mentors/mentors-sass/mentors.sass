@@ -1,0 +1,47 @@
+.mentors
+    height: 100vh
+    padding-top: 15vh
+
+    &-top
+
+        width: 100%
+        padding: 0 40%
+        margin-bottom: 50px
+
+        &-text
+            font-size: 24px
+            font-weight: 700
+            text-align: center
+
+        &-search
+            width: 100%
+            position: relative
+
+            &__input
+                margin-top: 10px
+                height: 45px
+                width: 100%
+                border: none
+                border: 1px solid #D1D1D1
+                padding-left: 35px
+                box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.1)
+                border-radius: 15px
+
+                &::placeholder
+                    font-weight: 500
+                    font-size: 14px
+                    color: #BCBCBC
+
+            &__emoji
+                position: absolute
+                top: 42%
+                left: 15px
+
+    &-container
+        width: 78%
+        margin: 0 auto
+
+        display: grid
+        grid-template-columns: 1fr 1fr 1fr
+        grid-column-gap: 10px
+        grid-row-gap: 1em

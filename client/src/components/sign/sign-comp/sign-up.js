@@ -2,10 +2,36 @@ import React from "react";
 
 import "../sign-sass/sign-up.sass";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
-
 const SignIn = ({ setSign }) => {
+    const handleCard = (event) => {
+        event.preventDefault();
+
+        const user = {
+            name: event.target.name.value,
+            surname: event.target.surname.value,
+            username: event.target.username.value,
+            contacts: event.target.contacts.value,
+            password: event.target.password.value,
+            email: event.target.email.value,
+            bio: event.target.bio.value,
+        };
+
+        addCardHandler(user);
+    };
+
+    async function addCardHandler(card) {
+        const response = await fetch("http://localhost:8080/api/task/create", {
+            method: "POST",
+            body: JSON.stringify(card),
+            headers: {
+                // "Content-Type": "application/card",
+                Accept: "*/*",
+            },
+        });
+        const data = await response.json();
+        console.log(data);
+    }
+
     return (
         <div className="sign-in">
             <div className="sign-in-welcome">
@@ -16,7 +42,7 @@ const SignIn = ({ setSign }) => {
 
             <div className="sign-in-text">Sign up!</div>
 
-            <form className="sign-in-main">
+            <form className="sign-in-main" onSubmit={handleCard}>
                 <div className="sign-in-main__inputs">
                     <div className="sign-in-main__inputs_block">
                         <div className="sign-in-main__inputs_block_element">

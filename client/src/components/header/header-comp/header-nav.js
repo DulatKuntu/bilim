@@ -15,9 +15,12 @@ const HeaderNav = () => {
 
             <ul className="header-nav-main">
                 <li className="header-nav-main__elements">
-                    <a href="#" className="header-nav-main__elements_link">
+                    <Link
+                        to="/mentors"
+                        className="header-nav-main__elements_link"
+                    >
                         Mentors
-                    </a>
+                    </Link>
                 </li>
                 <li className="header-nav-main__elements">
                     <a href="#" className="header-nav-main__elements_link">
