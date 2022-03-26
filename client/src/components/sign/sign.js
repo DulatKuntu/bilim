@@ -12,7 +12,6 @@ const Sign = ({ setUserRegistered }) => {
 
     return (
         <div className="sign">
-            <img src={signMain} alt="" className="sign-main__img" />
             {sign ? (
                 <SignUp setSign={setSign} />
             ) : (

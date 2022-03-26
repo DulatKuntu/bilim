@@ -11,7 +11,7 @@ const Mentors = () => {
     return (
         <div className="mentors">
             <div className="mentors-top">
-                <div className="mentors-top-text">Search mentors</div>
+                <div className="mentors-top-text">mentors</div>
 
                 <form className="mentors-top-search">
                     <FontAwesomeIcon
@@ -30,19 +30,6 @@ const Mentors = () => {
                 <Link to="/mentors/1">
                     <MentorsCard />
                 </Link>
-                <MentorsCard />
-                <MentorsCard />
-                <MentorsCard />
-                <MentorsCard />
-                <MentorsCard />
-                <MentorsCard />
-                <MentorsCard />
-                <MentorsCard />
-                <MentorsCard />
-                <MentorsCard />
-                <MentorsCard />
-                <MentorsCard />
-                <MentorsCard />
                 <MentorsCard />
                 <MentorsCard />
             </div>

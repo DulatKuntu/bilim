@@ -2,7 +2,7 @@ import React from "react";
 
 import "../header-sass/header-main.sass";
 
-import headerMain from "../header-img/img.png";
+import headerMain from "../header-img/bg.jpg";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -12,26 +12,21 @@ const HeaderMain = () => {
         <div className="header-main">
             <div className="header-main-text">
                 <div className="header-main-text__description">
-                    get your
+                    <div className="header-main-text__description_element">
+                        Hold the
+                        <span className="header-main-text__description_header">
+                            vision
+                        </span>
+                    </div>
                     <br />
-                    <span className="header-main-text__description_header">
-                        mentor’s
-                    </span>
-                    <br />
-                    from here
+                    <div className="header-main-text__description_element">
+                        trust the
+                        <span className="header-main-text__description_header">
+                            process
+                        </span>
+                    </div>
                 </div>
-                <form className="header-main-text__search">
-                    <input
-                        type="text"
-                        name="search"
-                        className="header-main-text__search_input"
-                        placeholder="search"
-                    />
-                    <FontAwesomeIcon
-                        icon={faSearch}
-                        className="header-main-text__search_emoji"
-                    />
-                </form>
+                <button className="header-main__search">search now</button>
             </div>
 
             <div className="header-main-photo-container">

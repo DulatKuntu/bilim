@@ -14,44 +14,38 @@
 
         &__description
 
-            &_header
-                font-weight: 400
-                font-size: 110px
-                line-height: 145px
+            &_element
+                display: flex
+                align-items: center
 
-                color: #FFFFFF
+                .header-main-text__description_header
+                    font-weight: 400
+                    font-size: 60px
 
-        &__search
-            margin-top: 30px
-            width: 30vw
-            position: relative
+                    margin-left: 10px
 
-            &_input
-                padding-left: 28px
+                    color: #FFFFFF
 
-                width: 100%
-                background: #FFFFFF
-                border-radius: 24px
-                height: 40px
-                border: none
+    &__search
+        margin-top: 30px
+        width: 20vw
+        position: relative
+        background-color: #3f7c66
+        border-radius: 30px
+        border: none
+        height: 40px
 
-                &::placeholder
-                    font-weight: 500
-                    font-size: 18px
-                    letter-spacing: 0.315em
-
-                    color: #808080
-
-            &_emoji
-                position: absolute
-                font-size: 25px
-                top: 25px
-                right: 40px
+        color: white
+        font-size: 20px
+        letter-spacing: 5px
 
     &-photo-container
         position: absolute
 
         z-index: 0
 
-        right: 5%
+        left: 0
         bottom: 0
+
+        .header-main-photo
+            width: 100vw

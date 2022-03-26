@@ -4,14 +4,16 @@ import "../header-sass/header-nav.sass";
 
 import { Link } from "react-router-dom";
 
+import logo from "../header-img/logo.png";
+
 const HeaderNav = ({ userRegistered }) => {
     return (
         <div className="header-nav">
             <div className="header-nav-logo__container">
-                <img src="" alt="" className="header-nav-logo" />
+                <img src={logo} alt="" className="header-nav-logo" />
             </div>
 
-            <div className="header-nav-company">Company name</div>
+            <div className="header-nav-company">EVISION</div>
 
             <ul className="header-nav-main">
                 <li className="header-nav-main__elements">
@@ -40,7 +42,7 @@ const HeaderNav = ({ userRegistered }) => {
                 </Link>
             ) : (
                 <Link to="/sign" className="header-nav-sign">
-                    Login/Sign up
+                    sign in
                 </Link>
             )}
         </div>

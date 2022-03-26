@@ -1,11 +1,13 @@
 .mentors-card
 
-    background: #24292E
+    background: #d4ddda
     border-radius: 8px
 
     color: #FFFFFF
 
     padding: 24px
+
+    margin-bottom: 20px
 
     &-upper
         display: flex
@@ -13,8 +15,8 @@
         margin-bottom: 18px
 
         &__img_container
-            width: 32px
-            height: 32px
+            width: 100px
+            height: 100px
             border-radius: 50%
             background-color: red
 
@@ -23,17 +25,26 @@
             .mentors-card-upper__img
 
         &__text
+            margin-left: 10px
 
             &_main
-                font-size: 16px
+                font-size: 30px
                 font-weight: 600
+                letter-spacing: 10px
+
+                color: #3f7c66
+                &::visited
+
+                    text-decoration: none
 
             &_specialization
-                font-size: 14px
-                color: #D1D5DA
+                font-size: 20px
+                color: white
 
     &-description
         font-size: 14px
+
+        color: #221530
 
     &-link
         margin-top: 16px

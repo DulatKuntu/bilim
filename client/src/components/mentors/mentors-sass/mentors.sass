@@ -1,17 +1,23 @@
 .mentors
     height: 100vh
     padding-top: 15vh
+    margin-bottom: 20px
 
     &-top
+        display: flex
+        align-items: center
 
         width: 100%
-        padding: 0 40%
-        margin-bottom: 50px
+        padding: 0 11%
+        margin-bottom: 30px
 
         &-text
-            font-size: 24px
+            font-size: 30px
             font-weight: 700
             text-align: center
+            text-transform: uppercase
+            margin-right: 50px
+            margin-top: 10px
 
         &-search
             width: 100%
@@ -20,28 +26,25 @@
             &__input
                 margin-top: 10px
                 height: 45px
-                width: 100%
+                width: 50%
                 border: none
                 border: 1px solid #D1D1D1
                 padding-left: 35px
                 box-shadow: inset 0px 1px 5px rgba(0, 0, 0, 0.1)
                 border-radius: 15px
+                background-color: #3f7c66
 
                 &::placeholder
                     font-weight: 500
                     font-size: 14px
-                    color: #BCBCBC
+                    color: white
 
             &__emoji
                 position: absolute
-                top: 42%
+                top: 44%
                 left: 15px
+                color: white
 
     &-container
         width: 78%
         margin: 0 auto
-
-        display: grid
-        grid-template-columns: 1fr 1fr 1fr
-        grid-column-gap: 10px
-        grid-row-gap: 1em

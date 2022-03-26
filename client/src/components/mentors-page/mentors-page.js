@@ -3,20 +3,29 @@ import MentorsPageQuest from "./mentors-comp/mentors-page-quest";
 
 import "./mentors-sass/mentors-page.sass";
 
+import { useEffect } from "react";
+
 const MentorsPage = () => {
+    const token = sessionStorage.getItem("token");
+
     useEffect(() => {
-        const allCardsHandler = async () => {
-            const response = await fetch("http://localhost:8080/api/task/all", {
-                headers: {
-                    Authorization: `${sessionStorage.getItem("token")}`,
-                    "Content-Type": "application/card",
-                },
-            });
+        async function addCardHandler(card) {
+            const response = await fetch(
+                "http://localhost:4000/unauthed/signup",
+                {
+                    method: "POST",
+                    body: JSON.stringify(token),
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        // Accept: "*/*",
+                    },
+                }
+            );
             const data = await response.json();
             console.log(data);
-        };
+        }
 
-        allCardsHandler();
+        addCardHandler();
     }, []);
 
     return (
@@ -24,17 +33,18 @@ const MentorsPage = () => {
             <MentorsPageTop />
 
             <div className="mentors-page-bio">
-                <h2 className="mentors-page-bio__header">Bio</h2>
-
                 <div className="mentors-page-bio__text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Adipisci nemo nihil neque sed, tempore fugiat ad esse. Ab
                     aliquid aperiam quidem blanditiis cumque assumenda ea sequi
-                    doloremque sint. Sapiente, tempore!
+                    doloremque sint. Sapiente, tempore! Lorem ipsum dolor sit
+                    amet, consectetur adipisicing elit. Adipisci nemo nihil
+                    neque sed, tempore fugiat ad esse. Ab aliquid aperiam quidem
+                    blanditiis cumque assumenda ea sequi doloremque sint.
+                    Sapiente, tempore!
                 </div>
             </div>
-            {/* 
-            <MentorsPageQuest /> */}
+            <button className="mentors-page__send">Contact me!</button>
         </div>
     );
 };

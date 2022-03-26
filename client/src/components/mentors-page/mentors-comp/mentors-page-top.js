@@ -20,20 +20,8 @@ const MentorsPageTop = () => {
                     Test
                 </div>
                 <div className="mentors-page-top-information__main_interests">
-                    <div className="mentors-page-top-information__main_interests_element">
-                        test
-                    </div>
-                    <div className="mentors-page-top-information__main_interests_element">
-                        test
-                    </div>
-                    <div className="mentors-page-top-information__main_interests_element">
-                        test
-                    </div>
+                    Test, Test, Test, Test
                 </div>
-
-                <button className="mentors-page-top-information__main_contacts">
-                    Contact me!
-                </button>
             </div>
         </div>
     );

@@ -13,17 +13,13 @@ const MentorsCard = () => {
                     <div className="mentors-card-upper__text_specialization">
                         Test
                     </div>
+
+                    <div className="mentors-card-description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Accusamus, eum maiores ab
+                    </div>
                 </div>
             </div>
-
-            <div className="mentors-card-description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusamus, eum maiores ab
-            </div>
-
-            <a href="#" className="mentors-card-link">
-                more info
-            </a>
         </div>
     );
 };
