@@ -85,7 +85,7 @@ func (h *AppHandler) SignIn(w http.ResponseWriter, r *http.Request) {
 	token := utils.GenerateToken(loginData.Username)
 	log.Println(loginData.Username, loginData.Password)
 	user, err := h.Repo.CheckPassword(loginData.Username, loginData.Password)
-
+	user.Token = token
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
@@ -98,4 +98,31 @@ func (h *AppHandler) SignIn(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	SendGeneral(user, w)
+}
+
+func (h *AppHandler) SignInMentor(w http.ResponseWriter, r *http.Request) {
+	loginData, err := requestHandler.GetLoginMentor(r)
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+
+	token := utils.GenerateToken(loginData.Username)
+	log.Println(loginData.Username, loginData.Password)
+	mentor, err := h.Repo.CheckPasswordMentor(loginData.Username, loginData.Password)
+
+	mentor.Token = token
+
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+
+	err = h.Repo.InsertToken(mentor.ID, token)
+
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+	SendGeneral(mentor, w)
 }

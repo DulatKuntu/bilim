@@ -68,17 +68,19 @@ func main() {
 
 func InitStaticRoutes(staticRouter *mux.Router, handler *handler.AppHandler) {
 	//staticRouter.HandleFunc("/zip/{fileName}", handler.ZIPHandler).Methods("POST")
-	//staticRouter.HandleFunc("/{locationType}/{imageType}/{fileName}", handler.RouterImageHandler).Methods("GET")
+	staticRouter.HandleFunc("/{locationType}/{fileName}", handler.RouterImageHandler).Methods("GET")
 }
 
 func InitRoutes(r *mux.Router, handler *handler.AppHandler) {
 	unauthed := r.PathPrefix("/unauthed").Subrouter()
 	buddy := r.PathPrefix("/buddy").Subrouter()
-	//authed := r.PathPrefix("/authed").Subrouter()
+	authed := r.PathPrefix("/authed").Subrouter()
 
 	unauthed.HandleFunc("/signup", handler.SignUp).Methods("POST")
 	unauthed.HandleFunc("/signupMentor", handler.SignUpMentor).Methods("POST")
 	unauthed.HandleFunc("/signin", handler.SignIn).Methods("POST")
+	unauthed.HandleFunc("/signinMentor", handler.SignInMentor).Methods("POST")
+	authed.HandleFunc("/getProfile", handler.GetProfile).Methods("GET")
 	buddy.HandleFunc("/postBuddy", handler.PostBuddy).Methods("POST")
 
 }
