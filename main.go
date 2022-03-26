@@ -72,10 +72,10 @@ func InitStaticRoutes(staticRouter *mux.Router, handler *handler.AppHandler) {
 }
 
 func InitRoutes(r *mux.Router, handler *handler.AppHandler) {
-	//unauthed := r.PathPrefix("/unauthed").Subrouter()
+	unauthed := r.PathPrefix("/unauthed").Subrouter()
 	//authed := r.PathPrefix("/authed").Subrouter()
 
-	//unauthed.HandleFunc("/signin", handler.SingIn).Methods("POST")
+	unauthed.HandleFunc("/signin", handler.SingUp).Methods("POST")
 
 }
 
