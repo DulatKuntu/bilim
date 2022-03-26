@@ -20,12 +20,12 @@ const SignIn = ({ setSign }) => {
     };
 
     async function addCardHandler(card) {
-        const response = await fetch("http://localhost:8080/api/task/create", {
+        const response = await fetch("http://localhost:4000/unauthed/signup", {
             method: "POST",
             body: JSON.stringify(card),
             headers: {
-                // "Content-Type": "application/card",
-                Accept: "*/*",
+                "Content-Type": "application/json",
+                // Accept: "*/*",
             },
         });
         const data = await response.json();
