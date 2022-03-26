@@ -24,14 +24,16 @@ type RequestUser struct {
 }
 
 type Mentor struct {
-	ID       int    `json:"id" bson:"id"`
-	Email    string `json:"email" bson:"email"`
-	Token    string `json:"token" bson:"token"`
-	Username string `json:"username" bson:"username"`
-	Password string `json:"password" bson:"password"`
-	Name     string `json:"name" bson:"name"`
-	Surname  string `json:"surname" bson:"surname"`
-	Bio      string `json:"bio" bson:"bio"`
+	ID        int      `json:"id" bson:"id"`
+	Email     string   `json:"email" bson:"email"`
+	Token     string   `json:"token" bson:"token"`
+	Username  string   `json:"username" bson:"username"`
+	Password  string   `json:"password" bson:"password"`
+	Name      string   `json:"name" bson:"name"`
+	Surname   string   `json:"surname" bson:"surname"`
+	Bio       string   `json:"bio" bson:"bio"`
+	Image     string   `json:"image" bson:"image"`
+	Interests []string `json:"interests" bson:"interests"`
 }
 
 type RequestMentor struct {

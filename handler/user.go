@@ -25,23 +25,6 @@ func (h *AppHandler) GetProfile(w http.ResponseWriter, r *http.Request) {
 	SendGeneral(user, w)
 }
 
-func (h *AppHandler) GetProfileMentor(w http.ResponseWriter, r *http.Request) {
-	mentorToken := requestHandler.GetToken(r)
-	mentorID, err := h.Repo.GetIDByToken(mentorToken)
-	if err != nil {
-		DefaultErrorHandler(err, w)
-		return
-	}
-	mentor, err := h.Repo.GetMentorByID(mentorID)
-
-	if err != nil {
-		DefaultErrorHandler(err, w)
-		return
-	}
-
-	SendGeneral(mentor, w)
-}
-
 func (h *AppHandler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
 	user, err := requestHandler.GetUser(r)
 	userToken := requestHandler.GetToken(r)
