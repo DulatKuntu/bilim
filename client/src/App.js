@@ -5,6 +5,7 @@ import Mentors from "./components/mentors/mentors";
 import MentorsPage from "./components/mentors-page/mentors-page";
 import Survey from "./components/survey/survey";
 import SurveyResults from "./components/survey-results/survey-results";
+import Profession from "./components/profession/profession";
 
 import "./app.sass";
 
@@ -28,6 +29,10 @@ function App() {
                 <Route
                     path="/sign/survey/results"
                     element={<SurveyResults />}
+                />
+                <Route
+                    path="/sign/survey/results/profession"
+                    element={<Profession />}
                 />
                 <Route path="/mentors" element={<Mentors />} />
                 <Route path="/mentors/:id" element={<MentorsPage />} />

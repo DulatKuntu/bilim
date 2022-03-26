@@ -1,5 +1,7 @@
 import "../survey-results-sass/survey-results-card.sass";
 
+import { Link } from "react-router-dom";
+
 const SurveyResultsCard = () => {
     return (
         <div className="survey-results-card">
@@ -27,9 +29,12 @@ const SurveyResultsCard = () => {
                 Accusamus, eum maiores ab
             </div>
 
-            <a href="#" className="survey-results-card-link">
+            <Link
+                to="/sign/survey/results/profession"
+                className="survey-results-card-link"
+            >
                 more info
-            </a>
+            </Link>
         </div>
     );
 };
