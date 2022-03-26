@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/DulatKuntu/bilim/requestHandler"
@@ -53,6 +54,7 @@ func (h *AppHandler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
 func (h *AppHandler) AddInterests(w http.ResponseWriter, r *http.Request) {
 	userToken := requestHandler.GetToken(r)
 	userID, err := h.Repo.GetIDByToken(userToken)
+	log.Print(err, userToken)
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
@@ -73,6 +75,7 @@ func (h *AppHandler) AddInterests(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AppHandler) GetPosts(w http.ResponseWriter, r *http.Request) {
+
 	userToken := requestHandler.GetToken(r)
 	userID, err := h.Repo.GetIDByToken(userToken)
 	if err != nil {

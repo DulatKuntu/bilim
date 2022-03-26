@@ -13,6 +13,7 @@ import (
 	"github.com/DulatKuntu/bilim/utils"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"github.com/rs/cors"
 )
 
 func init() {
@@ -55,12 +56,17 @@ func main() {
 		WriteTimeout: 1 * time.Second,
 		ReadTimeout:  1 * time.Second,
 	}
+	corsWrapper := cors.New(cors.Options{
+		AllowedMethods: []string{"GET", "POST"},
+		AllowedHeaders: []string{"Content-Type", "Origin", "Accept", "*"},
+	})
 	srv := &http.Server{
-		Handler:      r,
+		Handler:      corsWrapper.Handler(r),
 		Addr:         ":" + config.Port,
 		WriteTimeout: 1 * time.Second,
 		ReadTimeout:  1 * time.Second,
 	}
+
 	go srv.ListenAndServe()
 	log.Fatal(srvStatis.ListenAndServe())
 }

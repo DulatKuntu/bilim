@@ -26,18 +26,18 @@ func (h *AppHandler) GetProfileMentor(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AppHandler) GetMentors(w http.ResponseWriter, r *http.Request) {
-	mentorToken := requestHandler.GetToken(r)
-	mentorID, err := h.Repo.GetIDByToken(mentorToken)
+	userToken := requestHandler.GetToken(r)
+	userID, err := h.Repo.GetIDByToken(userToken)
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
 	}
-	mentor, err := h.Repo.GetMentorByID(mentorID)
+	mentors, err := h.Repo.GetMentors(userID)
 
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
 	}
 
-	SendGeneral(mentor, w)
+	SendGeneral(mentors, w)
 }

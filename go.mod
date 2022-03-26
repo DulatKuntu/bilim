@@ -10,6 +10,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/mux v1.8.0
 	github.com/joho/godotenv v1.4.0
+	github.com/rs/cors v1.8.2 // indirect
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	go.mongodb.org/mongo-driver v1.8.2
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
