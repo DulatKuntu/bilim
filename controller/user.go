@@ -70,6 +70,14 @@ func (r *DatabaseRepository) CreateUser(signData *model.RequestUser) (*model.Use
 		return nil, err
 	}
 
+	//var newUser model.User
+	// newUser.Email = signData.Email
+	// newUser.Username = signData.Username
+	// newUser.Password = signData.Password
+	// newUser.Name = signData.Name
+	// newUser.Surname = signData.Surname
+	// newUser.Bio = signData.Bio
+	// newUser.Interests = signData.Interests
 	var newUser model.User
 	newUser.ID = id
 	newUser.Email = signData.Email
@@ -77,6 +85,7 @@ func (r *DatabaseRepository) CreateUser(signData *model.RequestUser) (*model.Use
 	newUser.Name = signData.Name
 	newUser.Surname = signData.Surname
 	newUser.Bio = signData.Bio
+
 	_, err = usersCollection.InsertOne(
 		context.TODO(),
 		newUser,
