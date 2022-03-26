@@ -19,61 +19,101 @@ const SignIn = ({ setSign }) => {
             <form className="sign-in-main">
                 <div className="sign-in-main__inputs">
                     <div className="sign-in-main__inputs_block">
-                        <FontAwesomeIcon
-                            icon={faEnvelope}
-                            className="sign-in-main__inputs_block__emoji"
-                            id="sign-in-first__emoji"
-                        />
+                        <div className="sign-in-main__inputs_block_element">
+                            <label htmlFor="name">Enter your name!</label>
+                            <input
+                                type="text"
+                                name="name"
+                                className="sign-in-main__inputs_block_element__input"
+                                placeholder="here!"
+                            />
+                        </div>
 
-                        <input
-                            type="text"
-                            name="Email"
-                            className="sign-in-main__inputs_block__input"
-                            placeholder="example@gmail.com"
-                        />
-
-                        <FontAwesomeIcon
-                            icon={faKey}
-                            className="sign-in-main__inputs_block__emoji"
-                            id="sign-in-second__emoji"
-                        />
-
-                        <input
-                            type="text"
-                            name="Password"
-                            className="sign-in-main__inputs_block__input"
-                            placeholder="Enter your password"
-                        />
+                        <div className="sign-in-main__inputs_block_element">
+                            <label htmlFor="surname">Enter your surname!</label>
+                            <input
+                                type="text"
+                                name="surname"
+                                className="sign-in-main__inputs_block_element__input"
+                                placeholder="here!"
+                            />
+                        </div>
                     </div>
 
                     <div className="sign-in-main__inputs_block">
-                        <FontAwesomeIcon
-                            icon={faKey}
-                            className="sign-in-main__inputs_block__emoji"
-                            id="sign-in-second__emoji"
-                        />
+                        <div className="sign-in-main__inputs_block_element">
+                            <label
+                                htmlFor="username"
+                                className="sign-in-main__inputs_block_element_label"
+                            >
+                                Enter your username!
+                            </label>
+                            <input
+                                type="text"
+                                name="username"
+                                className="sign-in-main__inputs_block_element__input"
+                                placeholder="here!"
+                            />
+                        </div>
 
-                        <input
-                            type="text"
-                            name="Password"
-                            className="sign-in-main__inputs_block__input"
-                            placeholder="Enter your password"
-                        />
+                        <div className="sign-in-main__inputs_block_element">
+                            <label
+                                htmlFor="contacts"
+                                className="sign-in-main__inputs_block_element_label"
+                            >
+                                Enter your contacts!
+                            </label>
+                            <input
+                                type="text"
+                                name="contacts"
+                                className="sign-in-main__inputs_block_element__input"
+                                placeholder="here!"
+                            />
+                        </div>
+                    </div>
 
-                        <FontAwesomeIcon
-                            icon={faKey}
-                            className="sign-in-main__inputs_block__emoji"
-                            id="sign-in-second__emoji"
-                        />
+                    <div className="sign-in-main__inputs_block">
+                        <div className="sign-in-main__inputs_block_element">
+                            <label
+                                htmlFor="email"
+                                className="sign-in-main__inputs_block_element_label"
+                            >
+                                Enter your email!
+                            </label>
+                            <input
+                                type="text"
+                                name="email"
+                                className="sign-in-main__inputs_block_element__input"
+                                placeholder="example@gmail.com"
+                            />
+                        </div>
 
-                        <input
-                            type="text"
-                            name="Password"
-                            className="sign-in-main__inputs_block__input"
-                            placeholder="Enter your password"
-                        />
+                        <div className="sign-in-main__inputs_block_element">
+                            <label
+                                htmlFor="password"
+                                className="sign-in-main__inputs_block_element_label"
+                            >
+                                Enter your password!
+                            </label>
+                            <input
+                                type="text"
+                                name="password"
+                                className="sign-in-main__inputs_block_element__input"
+                                placeholder="**********"
+                            />
+                        </div>
                     </div>
                 </div>
+
+                <label htmlFor="bio" className="sign-in-main__bio_label">
+                    Enter your bio!
+                </label>
+                <input
+                    type="text"
+                    name="bio"
+                    className="sign-in-main__bio"
+                    placeholder="here!"
+                />
 
                 <input
                     type="submit"

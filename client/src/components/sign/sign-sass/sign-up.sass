@@ -9,18 +9,18 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08)
     border-radius: 8px
 
-    padding: 44px 40px
+    padding: 30px 40px
 
     &-welcome
         font-weight: 500
-        font-size: 30px
+        font-size: 20px
         line-height: 135.5%
         color: #2F2F2F
-        margin-bottom: 30px
+        margin-bottom: 10px
 
         &__company
             font-weight: 900
-            font-size: 40px
+            font-size: 30px
             line-height: 135.5%
 
             color: #6358DC
@@ -28,8 +28,7 @@
     &-text
         text-align: center
         font-weight: 900
-        font-size: 40px
-        margin-bottom: 20px
+        font-size: 30px
 
     &-main
         width: 100%
@@ -41,35 +40,35 @@
                 display: flex
                 justify-content: space-between
 
-                &__emoji
-                    position: absolute
-                    top: 0
-                    left: 10px
+                &_element
+                    width: 50%
+                    margin-top: 10px
 
-                #sign-in-first__emoji
-                    top: 35px
+                    &__emoji
+                        position: absolute
+                        top: 0
+                        left: 10px
 
-                #sign-in-second__emoji
-                    top: 105px
+                    #sign-in-first__emoji
+                        top: 35px
 
-                &__input
-                    width: 45%
-                    background: #ECECEC
-                    border-radius: 8px
-                    height: 50px
-                    border: none
-                    margin-top: 20px
+                    #sign-in-second__emoji
+                        top: 105px
 
-                    padding-left: 40px
+                    &__input
+                        width: 90%
+                        background: #ECECEC
+                        border-radius: 8px
+                        height: 50px
+                        border: none
 
-                    &::placeholder
-                        font-weight: 700
-                        font-size: 16px
+                        padding-left: 20px
 
-                        color: #2F2F2F
+                        &::placeholder
+                            font-weight: 700
+                            font-size: 16px
 
-                    &:nth-child(1)
-                        margin-top: 20px
+                            color: #2F2F2F
 
         &__bottom
             margin-top: 20px
@@ -111,8 +110,24 @@
 
             color: #FFFFFF
 
+        &__bio
+            margin-top: 10px
+            width: 95%
+            background: #ECECEC
+            border-radius: 8px
+            height: 50px
+            border: none
+
+            padding-left: 20px
+
+            &::placeholder
+                font-weight: 700
+                font-size: 16px
+
+                color: #2F2F2F
+
     &-no-account
-        margin-top: 40px
+        margin-top: 20px
         text-align: center
 
         &__link
