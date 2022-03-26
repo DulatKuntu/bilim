@@ -43,7 +43,6 @@ func main() {
 
 	r := mux.NewRouter()
 	InitRoutes(r, handler)
-	TestRoutes(r, handler)
 
 	// Static Routers
 	// # Used to handle static files such as: images, videos
@@ -75,16 +74,15 @@ func InitRoutes(r *mux.Router, handler *handler.AppHandler) {
 	unauthed := r.PathPrefix("/unauthed").Subrouter()
 	buddy := r.PathPrefix("/buddy").Subrouter()
 	authed := r.PathPrefix("/authed").Subrouter()
-
 	unauthed.HandleFunc("/signup", handler.SignUp).Methods("POST")
 	unauthed.HandleFunc("/signupMentor", handler.SignUpMentor).Methods("POST")
 	unauthed.HandleFunc("/signin", handler.SignIn).Methods("POST")
 	unauthed.HandleFunc("/signinMentor", handler.SignInMentor).Methods("POST")
 	authed.HandleFunc("/getProfile", handler.GetProfile).Methods("GET")
+	authed.HandleFunc("/getMentors", handler.GetMentors).Methods("GET")
+	authed.HandleFunc("/getMentor", handler.GetProfileMentor).Methods("GET")
+	authed.HandleFunc("/updateProfile", handler.UpdateProfile).Methods("POST")
 	buddy.HandleFunc("/postBuddy", handler.PostBuddy).Methods("POST")
-
-}
-
-func TestRoutes(r *mux.Router, handler *handler.AppHandler) {
-
+	authed.HandleFunc("/addInterest", handler.AddInterests).Methods("POST")
+	authed.HandleFunc("/getPosts", handler.GetPosts).Methods("GET")
 }

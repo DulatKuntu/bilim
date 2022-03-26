@@ -4,5 +4,8 @@
     },
     {
       "drop": "mentors"
+    },
+    {
+      "drop": "interests"
     }
 ]

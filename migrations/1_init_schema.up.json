@@ -4,5 +4,8 @@
     },
     {
       "create": "mentors"
+    },
+    {
+      "create": "interests"
     }
 ]
