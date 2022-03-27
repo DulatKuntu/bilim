@@ -7,7 +7,7 @@ import "./sign-sass/sign.sass";
 
 import signMain from "./sign-img/main.png";
 
-const Sign = ({ setUserRegistered }) => {
+const Sign = ({ setUserRegistered, setUserId }) => {
     const [sign, setSign] = useState(false);
 
     return (
@@ -18,6 +18,7 @@ const Sign = ({ setUserRegistered }) => {
                 <SignIn
                     setUserRegistered={setUserRegistered}
                     setSign={setSign}
+                    setUserId={setUserId}
                 />
             )}
         </div>

@@ -1,4 +1,4 @@
-import MentorsPageQuestElement from "./mentors-page-quest-element";
+import MentorsPageQuestElement from "./user-page-quest-element";
 
 const MentorsPageQuest = () => {
     return (

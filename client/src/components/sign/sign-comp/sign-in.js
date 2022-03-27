@@ -7,7 +7,7 @@ import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 
 import UserProfilePopUp from "./user-profile-pop-up";
 
-const SignIn = ({ setUserRegistered, setSign }) => {
+const SignIn = ({ setUserRegistered, setSign, setUserId }) => {
     const [submited, setSubmited] = useState(false);
     const [popUp, setPopUp] = useState(false);
 
@@ -34,6 +34,8 @@ const SignIn = ({ setUserRegistered, setSign }) => {
         });
         const data = await response.json();
         console.log(data);
+        setUserId(data.data.id);
+        console.log(typeof data.data.id);
         sessionStorage.setItem("token", data.data.token);
         setUserRegistered(true);
     }
@@ -46,12 +48,12 @@ const SignIn = ({ setUserRegistered, setSign }) => {
     return (
         <div className="sign-in">
             <div className="sign-in-welcome">
-                Welcome to
+                Добро пожаловать в
                 <br />
-                <span className="sign-in-welcome__company">Company name</span>
+                <span className="sign-in-welcome__company">Evision</span>
             </div>
 
-            <div className="sign-in-text">Sign in!</div>
+            <div className="sign-in-text">Войти!</div>
 
             <form className="sign-in-main" onSubmit={handleCard}>
                 <FontAwesomeIcon
@@ -91,13 +93,13 @@ const SignIn = ({ setUserRegistered, setSign }) => {
             </form>
 
             <div className="sign-in-no-account">
-                Don't have an account?
+                Нету аккаунта?
                 <a
                     href="#"
                     className="sign-in-no-account__link"
                     onClick={() => setSign(true)}
                 >
-                    Register
+                    Зарегестрироваться
                 </a>
             </div>
 

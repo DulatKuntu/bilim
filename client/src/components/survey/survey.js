@@ -92,7 +92,7 @@ const Survey = () => {
                     </div>
                 </div>
             </div>
-            <Link to="/sign/survey/results">
+            <Link to="/sign/user/survey/results">
                 <button className="survey-go-next">Next</button>
             </Link>
         </div>

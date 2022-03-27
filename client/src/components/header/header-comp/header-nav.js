@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import logo from "../header-img/logo.png";
 
-const HeaderNav = ({ userRegistered }) => {
+const HeaderNav = ({ userRegistered, userId }) => {
     return (
         <div className="header-nav">
             <div className="header-nav-logo__container">
@@ -37,7 +37,7 @@ const HeaderNav = ({ userRegistered }) => {
             </ul>
 
             {userRegistered ? (
-                <Link to="/mentors/1" className="header-nav-sign">
+                <Link to={`/user/${userId}`} className="header-nav-sign">
                     Ваш пейдж
                 </Link>
             ) : (

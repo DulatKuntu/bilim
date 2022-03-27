@@ -3,10 +3,12 @@ import MentorsPageQuest from "./mentors-comp/mentors-page-quest";
 
 import "./mentors-sass/mentors-page.sass";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const MentorsPage = () => {
     const token = sessionStorage.getItem("token");
+
+    const [card, SetCard] = useState(null);
 
     useEffect(() => {
         async function addCardHandler(card) {
@@ -21,31 +23,35 @@ const MentorsPage = () => {
                 }
             );
             const data = await response.json();
-            console.log(data);
+            SetCard(data);
         }
 
         addCardHandler();
     }, []);
 
-    return (
-        <div className="mentors-page">
-            <MentorsPageTop />
+    if (card) {
+        console.log(card);
 
-            <div className="mentors-page-bio">
-                <div className="mentors-page-bio__text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Adipisci nemo nihil neque sed, tempore fugiat ad esse. Ab
-                    aliquid aperiam quidem blanditiis cumque assumenda ea sequi
-                    doloremque sint. Sapiente, tempore! Lorem ipsum dolor sit
-                    amet, consectetur adipisicing elit. Adipisci nemo nihil
-                    neque sed, tempore fugiat ad esse. Ab aliquid aperiam quidem
-                    blanditiis cumque assumenda ea sequi doloremque sint.
-                    Sapiente, tempore!
+        return (
+            <div className="mentors-page">
+                <MentorsPageTop
+                    name={card.data.name}
+                    surname={card.data.surname}
+                    username={card.data.username}
+                    interests={card.data.interests}
+                />
+
+                <div className="mentors-page-bio">
+                    <div className="mentors-page-bio__text">
+                        {card.data.bio}
+                    </div>
                 </div>
+                <button className="mentors-page__send">Contact me!</button>
             </div>
-            <button className="mentors-page__send">Contact me!</button>
-        </div>
-    );
+        );
+    } else {
+        return <h1>Hello world</h1>;
+    }
 };
 
 export default MentorsPage;

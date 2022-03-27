@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 const UserProfilePopUp1 = () => {
     return (
         <div className="user-profile-pop-up">
-            <Link to="/sign/survey">
+            <Link to="/sign/user/survey">
                 <div className="user-profile-pop-up__container">
-                    You have Registered!
+                    Вы зарегестрировались!
                 </div>
             </Link>
         </div>

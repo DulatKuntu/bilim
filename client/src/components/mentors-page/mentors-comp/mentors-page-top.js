@@ -3,7 +3,7 @@ import "../mentors-sass/mentors-page-top.sass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 
-const MentorsPageTop = () => {
+const MentorsPageTop = ({ name, surname, username, interests }) => {
     return (
         <div className="mentors-page-top">
             <div className="mentors-page-top-information">
@@ -14,13 +14,13 @@ const MentorsPageTop = () => {
 
             <div className="mentors-page-top-information__main">
                 <div className="mentors-page-top-information__main_name">
-                    Test Test
+                    {`${name} ${surname}`}
                 </div>
                 <div className="mentors-page-top-information__main_username">
-                    Test
+                    {username}
                 </div>
                 <div className="mentors-page-top-information__main_interests">
-                    Test, Test, Test, Test
+                    {interests}
                 </div>
             </div>
         </div>

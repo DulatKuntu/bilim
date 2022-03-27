@@ -30,7 +30,7 @@ const SurveyResultsCard = () => {
             </div>
 
             <Link
-                to="/sign/survey/results/profession"
+                to="/sign/user/survey/results/profession"
                 className="survey-results-card-link"
             >
                 more info

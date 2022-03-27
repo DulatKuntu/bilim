@@ -1,0 +1,67 @@
+.user-page-pop-up
+    position: absolute
+    top: -68%
+    left: -16.7%
+    background-color: rgba(0, 0, 0, 0.3)
+    height: 100vh
+    width: 100vw
+
+    z-index: 100000
+
+    &__container
+        position: absolute
+        top: 60%
+        left: 50%
+        transform: translate(-50%, -50%)
+
+        width: 50vw
+        height: 180px
+
+        background: #FFFFFF
+
+        border: 1px solid #DEE2E6
+
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12), 0px 20px 20px rgba(0, 0, 0, 0.08)
+        border-radius: 8px
+
+        padding: 36px 40px
+
+        &_main
+            margin-top: 20px
+            display: flex
+
+            &_element
+                display: flex
+                align-items: center
+                margin-right: 10px
+
+            &__submit
+                background-color: #3f7c66
+                color: white
+                border: none
+                height: 35px
+                width: 25%
+
+                position: absolute
+                bottom: 20px
+                left: 50%
+                transform: translate(-50%)
+
+                margin-top: 10px
+
+                cursor: pointer
+
+        &__close
+            position: absolute
+            top: 24px
+            right: 24px
+
+            border: none
+            width: 30px
+            height: 30px
+
+            display: flex
+            justify-content: center
+            align-items: center
+
+            cursor: pointer

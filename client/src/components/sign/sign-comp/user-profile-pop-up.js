@@ -8,7 +8,7 @@ const UserProfilePopUp = () => {
         <div className="user-profile-pop-up">
             <Link to="/">
                 <div className="user-profile-pop-up__container">
-                    You have Registered!
+                    Вы зарегестрировались!
                 </div>
             </Link>
         </div>
