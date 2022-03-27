@@ -195,3 +195,25 @@ func (r *DatabaseRepository) AddInterest(interestID, userID int) error {
 
 	return err
 }
+
+func (r *DatabaseRepository) GetInterests() ([]*model.Interests, error) {
+	interestsCollection := r.db.Collection(utils.CollectionInterests)
+
+	cursor, err := interestsCollection.Find(
+		context.TODO(),
+		bson.M{},
+	)
+
+	var interests []*model.Interests
+	for cursor.Next(context.TODO()) {
+		var interest model.Interests
+		err = cursor.Decode(&interest)
+		if err != nil {
+			return nil, errors.New("no comment exists")
+		}
+		interests = append(interests, &interest)
+
+	}
+
+	return interests, err
+}

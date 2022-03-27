@@ -91,4 +91,5 @@ func InitRoutes(r *mux.Router, handler *handler.AppHandler) {
 	buddy.HandleFunc("/postBuddy", handler.PostBuddy).Methods("POST")
 	authed.HandleFunc("/addInterest", handler.AddInterests).Methods("POST")
 	authed.HandleFunc("/getPosts", handler.GetPosts).Methods("GET")
+	authed.HandleFunc("/getInterests", handler.GetInterests).Methods("GET")
 }
