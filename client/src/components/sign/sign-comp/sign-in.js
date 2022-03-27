@@ -33,6 +33,7 @@ const SignIn = ({ setUserRegistered, setSign }) => {
             },
         });
         const data = await response.json();
+        console.log(data);
         sessionStorage.setItem("token", data.data.token);
         setUserRegistered(true);
     }

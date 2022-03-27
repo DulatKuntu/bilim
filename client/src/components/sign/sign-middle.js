@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import "./sign-sass/sign-middle.sass";
 
-const Sign = ({ setUserRegistered }) => {
-    return <div className="sign"></div>;
+const SignMiddle = () => {
+    return <div className="sign-middle"></div>;
 };
 
-export default Sign;
+export default SignMiddle;

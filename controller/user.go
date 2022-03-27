@@ -46,6 +46,7 @@ func (r *DatabaseRepository) CheckPassword(Username, Password string) (*model.Us
 		context.TODO(),
 		bson.M{"username": Username, "password": Password},
 	).Decode(&userData)
+	log.Print(err)
 	if err != nil {
 		return nil, errors.New("username of password are not correct")
 	}

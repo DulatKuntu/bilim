@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
+	"log"
 	"net/http"
 
 	"github.com/DulatKuntu/bilim/model"
@@ -12,6 +13,7 @@ import (
 // GetSignUp used to get signup struct from request, also for validation
 func GetToken(r *http.Request) string {
 	reqToken := r.Header.Get("Authorization")
+	log.Print(r.Header)
 	return reqToken
 }
 

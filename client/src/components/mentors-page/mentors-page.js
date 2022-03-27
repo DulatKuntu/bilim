@@ -11,13 +11,12 @@ const MentorsPage = () => {
     useEffect(() => {
         async function addCardHandler(card) {
             const response = await fetch(
-                "http://localhost:4000/unauthed/signup",
+                "http://localhost:4000/authed/getProfile",
                 {
-                    method: "POST",
-                    body: JSON.stringify(token),
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
                         // Accept: "*/*",
+                        Authorization: `${token}`,
                     },
                 }
             );

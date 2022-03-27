@@ -77,19 +77,23 @@ func (h *AppHandler) SignIn(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	loginData, err := requestHandler.GetLogin(r)
+	log.Print(1)
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
 	}
 	token := utils.GenerateToken(loginData.Username)
+	log.Print(token)
 	user, err := h.Repo.CheckPassword(loginData.Username, loginData.Password)
-	user.Token = token
 
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
 	}
-
+	log.Print(err)
+	if user != nil {
+		user.Token = token
+	}
 	err = h.Repo.InsertToken(user.ID, token)
 
 	if err != nil {

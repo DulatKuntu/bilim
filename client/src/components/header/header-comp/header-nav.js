@@ -21,28 +21,28 @@ const HeaderNav = ({ userRegistered }) => {
                         to="/mentors"
                         className="header-nav-main__elements_link"
                     >
-                        Mentors
+                        Менторы
                     </Link>
                 </li>
                 <li className="header-nav-main__elements">
                     <a href="#" className="header-nav-main__elements_link">
-                        Study buddy
+                        Стади Бадди
                     </a>
                 </li>
                 <li className="header-nav-main__elements">
                     <a href="#" className="header-nav-main__elements_link">
-                        Groups
+                        Группы
                     </a>
                 </li>
             </ul>
 
             {userRegistered ? (
                 <Link to="/mentors/1" className="header-nav-sign">
-                    User Page
+                    Ваш пейдж
                 </Link>
             ) : (
                 <Link to="/sign" className="header-nav-sign">
-                    sign in
+                    Войти
                 </Link>
             )}
         </div>
