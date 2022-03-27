@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import UserProfilePopUp1 from "./user-profile-pop-up1";
 
-const SignUp = ({ setSign }) => {
+const SignUp = ({ setSign, user }) => {
     const [submited, setSubmited] = useState(false);
 
     const handleCard = (event) => {
@@ -25,15 +25,25 @@ const SignUp = ({ setSign }) => {
         addCardHandler(user);
     };
 
+    let link;
+    if (user == "s") {
+        link = "http://localhost:4000/unauthed/signup";
+    } else if (user == "m") {
+        link = "http://localhost:4000/unauthed/signupMentor";
+    }
+
     async function addCardHandler(card) {
-        const response = await fetch("http://localhost:4000/unauthed/signup", {
-            method: "POST",
-            body: JSON.stringify(card),
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                // Accept: "*/*",
-            },
-        });
+        const response = await fetch(
+            { link },
+            {
+                method: "POST",
+                body: JSON.stringify(card),
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    // Accept: "*/*",
+                },
+            }
+        );
         const data = await response.json();
         console.log(data);
     }
@@ -170,7 +180,7 @@ const SignUp = ({ setSign }) => {
                 </a>
             </div>
 
-            {submited && <UserProfilePopUp1 />}
+            {submited && <UserProfilePopUp1 user={user} />}
         </div>
     );
 };

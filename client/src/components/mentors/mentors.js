@@ -8,10 +8,8 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const Mentors = () => {
+const Mentors = ({ card, setCard }) => {
     const token = sessionStorage.getItem("token");
-
-    const [card, SetCard] = useState(null);
 
     useEffect(() => {
         async function addCardHandler(card) {
@@ -26,14 +24,14 @@ const Mentors = () => {
                 }
             );
             const data = await response.json();
-            console.log(data);
-            SetCard(data);
+            setCard(data.data);
         }
 
         addCardHandler();
     }, []);
 
     if (card) {
+        console.log("Hello");
         console.log(card);
         return (
             <div className="mentors">
@@ -54,11 +52,20 @@ const Mentors = () => {
                 </div>
 
                 <div className="mentors-container">
-                    <Link to="/mentors/1" style={{ textDecoration: "none" }}>
-                        <MentorsCard />
-                    </Link>
-                    <MentorsCard />
-                    <MentorsCard />
+                    {card.map((el) => {
+                        return (
+                            <Link
+                                to={`/mentors/${el.id}`}
+                                style={{ textDecoration: "none" }}
+                            >
+                                <MentorsCard
+                                    name={el.name}
+                                    interests={el.interests}
+                                    bio={el.bio}
+                                />
+                            </Link>
+                        );
+                    })}
                 </div>
             </div>
         );

@@ -11,7 +11,7 @@ import img8 from "../../img/user/8.png";
 import img9 from "../../img/user/9.png";
 import img10 from "../../img/user/10.png";
 
-const MentorsCard = () => {
+const MentorsCard = ({ name, interests, bio }) => {
     const images = [
         img1,
         img2,
@@ -38,15 +38,12 @@ const MentorsCard = () => {
                 </div>
 
                 <div className="mentors-card-upper__text">
-                    <div className="mentors-card-upper__text_main">Test</div>
+                    <div className="mentors-card-upper__text_main">{name}</div>
                     <div className="mentors-card-upper__text_specialization">
-                        Test
+                        {interests}
                     </div>
 
-                    <div className="mentors-card-description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Accusamus, eum maiores ab
-                    </div>
+                    <div className="mentors-card-description">{bio}</div>
                 </div>
             </div>
         </div>

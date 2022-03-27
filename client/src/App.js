@@ -10,6 +10,7 @@ import Survey from "./components/survey/survey";
 import SurveyResults from "./components/survey-results/survey-results";
 import Profession from "./components/profession/profession";
 import UserPage from "./components/user-page/user-page";
+import Friend from "./components/friend/friend";
 
 import "./app.sass";
 
@@ -19,14 +20,23 @@ import { Routes, Route } from "react-router-dom";
 function App() {
     const [userRegistered, setUserRegistered] = useState(false);
     const [userId, setUserId] = useState(0);
+    const [card, setCard] = useState([]);
+    const [user, setUser] = useState("s");
 
     return (
         <div className="App">
-            <HeaderNav userRegistered={userRegistered} userId={userId} />
+            <HeaderNav
+                userRegistered={userRegistered}
+                userId={userId}
+                user={user}
+            />
 
             <Routes>
                 <Route path="/" element={<Header />} />
-                <Route path="/sign" element={<SignMiddle />} />
+                <Route
+                    path="/sign"
+                    element={<SignMiddle setUser={setUser} />}
+                />
                 <Route
                     path="/sign/user"
                     element={
@@ -42,6 +52,7 @@ function App() {
                         <Sign
                             setUserRegistered={setUserRegistered}
                             setUserId={setUserId}
+                            user={user}
                         />
                     }
                 />
@@ -54,10 +65,17 @@ function App() {
                     path="/sign/user/survey/results/profession"
                     element={<Profession />}
                 />
-                <Route path="/mentors" element={<Mentors />} />
-                <Route path="/mentors/:id" element={<MentorsPage />} />
+                <Route
+                    path="/mentors"
+                    element={<Mentors setCard={setCard} card={card} />}
+                />
+                <Route
+                    path="/mentors/:id"
+                    element={<MentorsPage card={card} />}
+                />
 
                 <Route path="/user/:id" element={<UserPage />} />
+                <Route path="/friend" element={<Friend />} />
             </Routes>
         </div>
     );

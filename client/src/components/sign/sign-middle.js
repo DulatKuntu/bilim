@@ -4,13 +4,25 @@ import "./sign-sass/sign-middle.sass";
 
 import { Link } from "react-router-dom";
 
-const SignMiddle = () => {
+const SignMiddle = ({ setUser }) => {
     return (
         <div className="sign-middle">
-            <Link to="/sign/user" style={{ textDecoration: "none" }}>
-                <div className="sign-middle-container">Я юзер!</div>
+            <Link
+                to="/sign/user"
+                style={{ textDecoration: "none" }}
+                onClick={() => {
+                    setUser("s");
+                }}
+            >
+                <div className="sign-middle-container">Я студент!</div>
             </Link>
-            <Link to="/sign/mentor" style={{ textDecoration: "none" }}>
+            <Link
+                to="/sign/mentor"
+                style={{ textDecoration: "none" }}
+                onClick={() => {
+                    setUser("m");
+                }}
+            >
                 <div className="sign-middle-container">Я ментор!</div>
             </Link>
         </div>

@@ -7,7 +7,7 @@ import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 
 import UserProfilePopUp from "./user-profile-pop-up";
 
-const SignIn = ({ setUserRegistered, setSign, setUserId }) => {
+const SignIn = ({ setUserRegistered, setSign, setUserId, user }) => {
     const [submited, setSubmited] = useState(false);
     const [popUp, setPopUp] = useState(false);
 
@@ -23,15 +23,25 @@ const SignIn = ({ setUserRegistered, setSign, setUserId }) => {
         addCardHandler(user);
     };
 
+    let link;
+    if (user == "s") {
+        link = "http://localhost:4000/unauthed/signin";
+    } else if (user == "m") {
+        link = "http://localhost:4000/unauthed/signinMentor";
+    }
+
     async function addCardHandler(card) {
-        const response = await fetch("http://localhost:4000/unauthed/signin", {
-            method: "POST",
-            body: JSON.stringify(card),
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                // Accept: "*/*",
-            },
-        });
+        const response = await fetch(
+            { link },
+            {
+                method: "POST",
+                body: JSON.stringify(card),
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    // Accept: "*/*",
+                },
+            }
+        );
         const data = await response.json();
         console.log(data);
         setUserId(data.data.id);
