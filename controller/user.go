@@ -96,6 +96,22 @@ func (r *DatabaseRepository) InsertToken(UserID int, token string) error {
 	return err
 }
 
+func (r *DatabaseRepository) InsertTokenMentor(UserID int, token string) error {
+	mentorsCollection := r.db.Collection(utils.CollectionMentor)
+
+	_, err := mentorsCollection.UpdateOne(
+		context.TODO(),
+		bson.M{"id": UserID},
+		bson.M{
+			"$set": bson.M{
+				"token": token,
+			},
+		},
+	)
+
+	return err
+}
+
 func (r *DatabaseRepository) GetIDByToken(token interface{}) (int, error) {
 	usersCollection := r.db.Collection(utils.CollectionUser)
 
@@ -189,7 +205,7 @@ func (r *DatabaseRepository) AddInterest(interestID, userID int) error {
 			"id": userID,
 		},
 		bson.M{
-			"$push": bson.M{"interests": interestID},
+			"$addToSet": bson.M{"interests": interestID},
 		},
 	)
 

@@ -36,6 +36,8 @@ type Mentor struct {
 	Bio       string `json:"bio" bson:"bio"`
 	Image     string `json:"image" bson:"image"`
 	Interests []int  `json:"interests" bson:"interests"`
+	Students  []int  `json:"students" bson:"students"`
+	Pending   []int  `json:"pending" bson:"pending"`
 }
 
 type RequestMentor struct {
@@ -46,6 +48,8 @@ type RequestMentor struct {
 	Surname   string `json:"surname" bson:"surname"`
 	Bio       string `json:"bio" bson:"bio"`
 	Interests []int  `json:"interests" bson:"interests"`
+	Students  []int  `json:"students" bson:"students"`
+	Pending   []int  `json:"pending" bson:"pending"`
 }
 
 type LoginInfo struct {
