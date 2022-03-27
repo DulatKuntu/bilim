@@ -8,7 +8,8 @@ const (
 	LOCLDBURI = "mongodb://localhost:27017"
 
 	// CollectionUsers collection
-	CollectionUser   = "users"
-	CollectionMentor = "mentors"
-	CollectionPosts  = "posts"
+	CollectionUser      = "users"
+	CollectionMentor    = "mentors"
+	CollectionPosts     = "posts"
+	CollectionInterests = "interests"
 )

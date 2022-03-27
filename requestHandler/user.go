@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
-	"log"
 	"net/http"
 
 	"github.com/DulatKuntu/bilim/model"
@@ -13,7 +12,6 @@ import (
 // GetSignUp used to get signup struct from request, also for validation
 func GetToken(r *http.Request) string {
 	reqToken := r.Header.Get("Authorization")
-	log.Print(r.Header)
 	return reqToken
 }
 
@@ -39,4 +37,17 @@ func GetInterest(r *http.Request) (*model.Interests, error) {
 		return nil, errors.New("bad request")
 	}
 	return &s, nil
+}
+func GetMentorID(r *http.Request) (int, error) {
+	type id struct {
+		ID int `json:"id" bson:"id"`
+	}
+	var s id
+	body, _ := ioutil.ReadAll(r.Body)
+	err := json.Unmarshal(body, &s)
+
+	if err != nil {
+		return 0, errors.New("bad request")
+	}
+	return s.ID, nil
 }

@@ -70,6 +70,8 @@ func (r *DatabaseRepository) CreateMentor(signData *model.RequestMentor) (*model
 	newMentor.Surname = signData.Surname
 	newMentor.Bio = signData.Bio
 	newMentor.Interests = signData.Interests
+	newMentor.Students = signData.Students
+	newMentor.Pending = signData.Pending
 	_, err = mentorsCollection.InsertOne(
 		context.TODO(),
 		newMentor,
@@ -167,22 +169,7 @@ func (r *DatabaseRepository) GetPosts(userID int) ([]*model.Mentor, error) {
 	return mentors, err
 }
 
-func (r *DatabaseRepository) AddInterestMentor(interestID, mentorID int) error {
-	mentorsCollection := r.db.Collection(utils.CollectionMentor)
-	_, err := mentorsCollection.UpdateOne(
-		context.TODO(),
-		bson.M{
-			"id": mentorID,
-		},
-		bson.M{
-			"$push": bson.M{"interests": interestID},
-		},
-	)
-
-	return err
-}
-
-func (r *DatabaseRepository) GetMentorIDByToken(token interface{}) (int, error) {
+func (r *DatabaseRepository) GetMentorIDByToken(token string) (int, error) {
 	mentorsCollection := r.db.Collection(utils.CollectionMentor)
 
 	var Mentor model.Mentor
@@ -191,14 +178,48 @@ func (r *DatabaseRepository) GetMentorIDByToken(token interface{}) (int, error) 
 		context.TODO(),
 		bson.M{"token": token},
 	).Decode(&Mentor)
-	log.Print(token)
+
+	log.Print(err)
 	if err != nil {
 		return 0, err
 	}
-	log.Print(Mentor)
 	if token == "" {
 		return 0, errors.New("Token not set")
 	}
 	return Mentor.ID, nil
 
+}
+
+func (r *DatabaseRepository) AddInterestMentor(interestID, userID int) error {
+	mentorsCollection := r.db.Collection(utils.CollectionMentor)
+
+	_, err := mentorsCollection.UpdateOne(
+		context.TODO(),
+		bson.M{
+			"id": userID,
+		},
+		bson.M{
+			"$addToSet": bson.M{"interests": interestID},
+		},
+	)
+
+	return err
+}
+
+func (r *DatabaseRepository) AddMentor(userID, mentorID int) error {
+	/*mentorsCollection := r.db.Collection(utils.CollectionMentor)
+
+	_, err := mentorsCollection.InsertOne(
+		context.TODO(),
+		bson.M{
+			"id": userID,
+		},
+		bson.M{
+			"$addToSet": bson.M{"interests": interestID},
+		},
+	)
+
+	return err
+	*/
+	return nil
 }

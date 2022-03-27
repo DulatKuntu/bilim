@@ -111,17 +111,15 @@ func (h *AppHandler) SignInMentor(w http.ResponseWriter, r *http.Request) {
 	}
 
 	token := utils.GenerateToken(loginData.Username)
-	log.Println(loginData.Username, loginData.Password)
 	mentor, err := h.Repo.CheckPasswordMentor(loginData.Username, loginData.Password)
 
 	mentor.Token = token
-
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
 	}
 
-	err = h.Repo.InsertToken(mentor.ID, token)
+	err = h.Repo.InsertTokenMentor(mentor.ID, token)
 
 	if err != nil {
 		DefaultErrorHandler(err, w)
