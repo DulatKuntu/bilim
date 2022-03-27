@@ -38,7 +38,7 @@ func GetInterest(r *http.Request) (*model.Interests, error) {
 	}
 	return &s, nil
 }
-func GetMentorID(r *http.Request) (int, error) {
+func GetID(r *http.Request) (int, error) {
 	type id struct {
 		ID int `json:"id" bson:"id"`
 	}

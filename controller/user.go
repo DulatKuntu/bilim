@@ -71,7 +71,7 @@ func (r *DatabaseRepository) CreateUser(signData *model.RequestUser) (*model.Use
 	newUser.Bio = signData.Bio
 	newUser.Password = signData.Password
 	newUser.Interests = signData.Interests
-
+	newUser.Mentors = signData.Mentors
 	_, err = usersCollection.InsertOne(
 		context.TODO(),
 		newUser,
@@ -112,7 +112,7 @@ func (r *DatabaseRepository) InsertTokenMentor(UserID int, token string) error {
 	return err
 }
 
-func (r *DatabaseRepository) GetIDByToken(token interface{}) (int, error) {
+func (r *DatabaseRepository) GetIDByToken(token string) (int, error) {
 	usersCollection := r.db.Collection(utils.CollectionUser)
 
 	var User model.User
@@ -121,7 +121,7 @@ func (r *DatabaseRepository) GetIDByToken(token interface{}) (int, error) {
 		context.TODO(),
 		bson.M{"token": token},
 	).Decode(&User)
-	log.Print(token)
+
 	if err != nil {
 		return 0, err
 	}

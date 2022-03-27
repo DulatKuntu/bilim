@@ -207,19 +207,76 @@ func (r *DatabaseRepository) AddInterestMentor(interestID, userID int) error {
 }
 
 func (r *DatabaseRepository) AddMentor(userID, mentorID int) error {
-	/*mentorsCollection := r.db.Collection(utils.CollectionMentor)
-
-	_, err := mentorsCollection.InsertOne(
+	mentorsCollection := r.db.Collection(utils.CollectionMentor)
+	usersCollection := r.db.Collection(utils.CollectionUser)
+	MentorExists, err := usersCollection.CountDocuments(
 		context.TODO(),
 		bson.M{
-			"id": userID,
-		},
-		bson.M{
-			"$addToSet": bson.M{"interests": interestID},
+			"id":      userID,
+			"mentors": mentorID,
 		},
 	)
+	if err != nil {
+		return err
+	}
+	if MentorExists > 0 {
+		return nil
+	}
+	_, err = mentorsCollection.UpdateOne(
+		context.TODO(),
+		bson.M{"id": mentorID},
+		bson.M{
+			"$addToSet": bson.M{
+				"pending": userID,
+			},
+		},
+	)
+	if err != nil {
+		return err
+	}
 
-	return err
-	*/
+	return nil
+}
+
+func (r *DatabaseRepository) AcceptStudent(userID, mentorID int) error {
+	mentorCollection := r.db.Collection(utils.CollectionMentor)
+	usersCollection := r.db.Collection(utils.CollectionUser)
+	_, err := mentorCollection.UpdateOne(
+		context.TODO(),
+		bson.M{"id": mentorID},
+		bson.M{
+			"$pull": bson.M{
+				"pending": userID,
+			},
+		},
+	)
+	if err != nil {
+		return err
+	}
+	_, err = mentorCollection.UpdateOne(
+		context.TODO(),
+		bson.M{"id": mentorID},
+		bson.M{
+			"$addToSet": bson.M{
+				"students": userID,
+			},
+		},
+	)
+	if err != nil {
+		return err
+	}
+	_, err = usersCollection.UpdateOne(
+		context.TODO(),
+		bson.M{"id": userID},
+		bson.M{
+			"$addToSet": bson.M{
+				"mentors": mentorID,
+			},
+		},
+	)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

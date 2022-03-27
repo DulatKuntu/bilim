@@ -67,19 +67,24 @@ func (h *AppHandler) AddMentorInterests(w http.ResponseWriter, r *http.Request) 
 	SendGeneral(interests, w)
 }
 
-func (h *AppHandler) AddMentor(w http.ResponseWriter, r *http.Request) {
-	userToken := requestHandler.GetToken(r)
-	userID, err := h.Repo.GetMentorIDByToken(userToken)
+func (h *AppHandler) AcceptStudent(w http.ResponseWriter, r *http.Request) {
+	mentorToken := requestHandler.GetToken(r)
+	log.Println(mentorToken)
+	mentorID, err := h.Repo.GetMentorIDByToken(mentorToken)
+	log.Println(mentorID, err)
+
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
 	}
-	mentorID, err := requestHandler.GetMentorID(r)
+	userID, err := requestHandler.GetID(r)
+	log.Println(userID, err)
+
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return
 	}
-	err = h.Repo.AddMentor(userID, mentorID)
+	err = h.Repo.AcceptStudent(userID, mentorID)
 	if err != nil {
 		DefaultErrorHandler(err, w)
 		return

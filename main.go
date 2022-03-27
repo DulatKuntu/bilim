@@ -93,6 +93,7 @@ func InitRoutes(r *mux.Router, handler *handler.AppHandler) {
 	authed.HandleFunc("/addMentorInterest", handler.AddMentorInterests).Methods("POST")
 	authed.HandleFunc("/getPosts", handler.GetPosts).Methods("GET")
 	authed.HandleFunc("/getInterests", handler.GetInterests).Methods("GET")
-	authed.HandleFunc("/addMentor", handler.AddMentor).Methods("GET")
+	authed.HandleFunc("/addMentor", handler.AddMentor).Methods("POST")
+	authed.HandleFunc("/acceptStudent", handler.AcceptStudent).Methods("POST")
 
 }

@@ -12,6 +12,7 @@ type User struct {
 	Bio       string   `json:"bio" bson:"bio"`             //mentor or student
 	Interests []int    `json:"interests" bson:"interests"` //for example, Biology, CS, Engineering
 	Groups    []string `json:"groups" bson:"groups"`
+	Mentors   []int    `json:"mentors" bson:"mentors"`
 }
 
 type RequestUser struct {
@@ -23,6 +24,7 @@ type RequestUser struct {
 	Bio       string   `json:"bio" bson:"bio"`
 	Interests []int    `json:"interests" bson:"interests"` //for example, Biology, CS, Engineering
 	Groups    []string `json:"groups" bson:"groups"`
+	Mentors   []int    `json:"mentors" bson:"mentors"`
 }
 
 type Mentor struct {
