@@ -233,3 +233,24 @@ func (r *DatabaseRepository) GetInterests() ([]*model.Interests, error) {
 
 	return interests, err
 }
+func (r *DatabaseRepository) GetBuddy() ([]*model.BuddyPost, error) {
+	postsCollection := r.db.Collection(utils.CollectionPosts)
+
+	cursor, err := postsCollection.Find(
+		context.TODO(),
+		bson.M{},
+	)
+
+	var interests []*model.BuddyPost
+	for cursor.Next(context.TODO()) {
+		var interest model.BuddyPost
+		err = cursor.Decode(&interest)
+		if err != nil {
+			return nil, errors.New("no comment exists")
+		}
+		interests = append(interests, &interest)
+
+	}
+
+	return interests, err
+}

@@ -89,7 +89,23 @@ func (h *AppHandler) GetPosts(w http.ResponseWriter, r *http.Request) {
 
 	SendGeneral(mentors, w)
 }
+func (h *AppHandler) GetBuddy(w http.ResponseWriter, r *http.Request) {
 
+	userToken := requestHandler.GetToken(r)
+	_, err := h.Repo.GetIDByToken(userToken)
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+	study, err := h.Repo.GetBuddy()
+
+	if err != nil {
+		DefaultErrorHandler(err, w)
+		return
+	}
+
+	SendGeneral(study, w)
+}
 func (h *AppHandler) GetInterests(w http.ResponseWriter, r *http.Request) {
 	userToken := requestHandler.GetToken(r)
 	_, err := h.Repo.GetIDByToken(userToken)

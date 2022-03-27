@@ -78,7 +78,6 @@ func InitStaticRoutes(staticRouter *mux.Router, handler *handler.AppHandler) {
 
 func InitRoutes(r *mux.Router, handler *handler.AppHandler) {
 	unauthed := r.PathPrefix("/unauthed").Subrouter()
-	buddy := r.PathPrefix("/buddy").Subrouter()
 	authed := r.PathPrefix("/authed").Subrouter()
 	unauthed.HandleFunc("/signup", handler.SignUp).Methods("POST")
 	unauthed.HandleFunc("/signupMentor", handler.SignUpMentor).Methods("POST")
@@ -88,7 +87,8 @@ func InitRoutes(r *mux.Router, handler *handler.AppHandler) {
 	authed.HandleFunc("/getMentors", handler.GetMentors).Methods("GET")
 	authed.HandleFunc("/getMentor", handler.GetProfileMentor).Methods("GET")
 	authed.HandleFunc("/updateProfile", handler.UpdateProfile).Methods("POST")
-	buddy.HandleFunc("/postBuddy", handler.PostBuddy).Methods("POST")
+	authed.HandleFunc("/postBuddy", handler.PostBuddy).Methods("POST")
+	authed.HandleFunc("/getBuddy", handler.GetBuddy).Methods("GET")
 	authed.HandleFunc("/addInterest", handler.AddInterests).Methods("POST")
 	authed.HandleFunc("/addMentorInterest", handler.AddMentorInterests).Methods("POST")
 	authed.HandleFunc("/getPosts", handler.GetPosts).Methods("GET")
