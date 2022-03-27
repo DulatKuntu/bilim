@@ -69,6 +69,7 @@ func (r *DatabaseRepository) CreateMentor(signData *model.RequestMentor) (*model
 	newMentor.Name = signData.Name
 	newMentor.Surname = signData.Surname
 	newMentor.Bio = signData.Bio
+	newMentor.Interests = signData.Interests
 	_, err = mentorsCollection.InsertOne(
 		context.TODO(),
 		newMentor,
@@ -164,4 +165,40 @@ func (r *DatabaseRepository) GetPosts(userID int) ([]*model.Mentor, error) {
 	}
 
 	return mentors, err
+}
+
+func (r *DatabaseRepository) AddInterestMentor(interestID, mentorID int) error {
+	mentorsCollection := r.db.Collection(utils.CollectionMentor)
+	_, err := mentorsCollection.UpdateOne(
+		context.TODO(),
+		bson.M{
+			"id": mentorID,
+		},
+		bson.M{
+			"$push": bson.M{"interests": interestID},
+		},
+	)
+
+	return err
+}
+
+func (r *DatabaseRepository) GetMentorIDByToken(token interface{}) (int, error) {
+	mentorsCollection := r.db.Collection(utils.CollectionMentor)
+
+	var Mentor model.Mentor
+
+	err := mentorsCollection.FindOne(
+		context.TODO(),
+		bson.M{"token": token},
+	).Decode(&Mentor)
+	log.Print(token)
+	if err != nil {
+		return 0, err
+	}
+	log.Print(Mentor)
+	if token == "" {
+		return 0, errors.New("Token not set")
+	}
+	return Mentor.ID, nil
+
 }
