@@ -70,6 +70,8 @@ func (r *DatabaseRepository) CreateUser(signData *model.RequestUser) (*model.Use
 	newUser.Surname = signData.Surname
 	newUser.Bio = signData.Bio
 	newUser.Password = signData.Password
+	newUser.Interests = signData.Interests
+
 	_, err = usersCollection.InsertOne(
 		context.TODO(),
 		newUser,
@@ -187,7 +189,7 @@ func (r *DatabaseRepository) AddInterest(interestID, userID int) error {
 			"id": userID,
 		},
 		bson.M{
-			"$addToSet": bson.M{"interests": interestID},
+			"$push": bson.M{"interests": interestID},
 		},
 	)
 

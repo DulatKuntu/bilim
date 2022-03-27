@@ -8,7 +8,9 @@
                 "username":"DulatKuntu",
                 "name":"Dulat",
                 "surname":"Kuntu",
-                "bio":"bio"
+                "bio":"bio",
+                "interests":[],
+                "groups":[]
                 }
             ]
     },
@@ -21,7 +23,8 @@
                 "username":"DulatKuntuMentor",
                 "name":"DulatMentor",
                 "surname":"KuntuMentor",
-                "bio":"bioMentor"
+                "bio":"bioMentor",
+                "interests":[]
             }
         ]
     },
